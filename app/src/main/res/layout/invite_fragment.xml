@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".invite.InviteFragment">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_toolbar"
+        >
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:background="@drawable/shape_toolbar"
+            app:navigationIcon="@drawable/ic_back">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/baby_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Invite partner"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/text"
+        style="@style/InviteScreenTitle"
+        android:layout_below="@+id/app_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Invite partner to \n Baby Care!"/>
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="286dp"
+        android:layout_height="267dp"
+        android:src="@drawable/bobas"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/text"/>
+
+    <TextView
+        style="@style/CodeTextStyle"
+        android:id="@+id/code_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your invite code:"
+        android:layout_below="@id/imageView6"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        style="@style/CodeTextStyle"
+        android:id="@+id/code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00000000000"
+        android:layout_below="@id/code_title"
+        android:layout_centerHorizontal="true"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/share_fab"
+        style="@style/ExtendedFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share"
+        app:icon="@drawable/ic_share"
+        android:layout_below="@+id/code"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        />
+</RelativeLayout>

@@ -1,10 +1,98 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/righteous</item>
     </style>
+    
+    <style name="SplashScreenTitle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">55sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="fontFamily">@font/righteous</item>
+    </style>
+
+    <style name="WelcomeScreenTitle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">50sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="fontFamily">@font/righteous</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginBottom">35dp</item>
+        <item name="android:paddingTop">30dp</item>
+    </style>
+
+    <style name="InviteScreenTitle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">35sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="fontFamily">@font/righteous</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:paddingTop">30dp</item>
+    </style>
+
+    <style name="CardViewTitle" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginStart">88dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="CodeTextStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginStart">88dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/shape_edit_text</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginStart">30dp</item>
+        <item name="android:layout_marginEnd">30dp</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="hintTextColor">@color/colorHint</item>
+    </style>
+
+    <style name="MaterialButtonWhite" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
+        <item name="backgroundTint">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="iconTint">@color/colorPrimary</item>
+    </style>
+
+    <style name="MaterialButtonPrimary" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="iconTint">@color/colorWhite</item>
+    </style>
+
+    <style name="WelcomeCardTitle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_marginTop">15dp</item>
+    </style>
+
+    <style name="CardViewStyle" parent="CardView">
+        <item name="cardElevation">5dp</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
+
+    <style name="ExtendedFAB" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="iconTint">@color/colorWhite</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+    </style>
+
 
 </resources>

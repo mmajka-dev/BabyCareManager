@@ -69,4 +69,22 @@ class FirebaseSource(path: String) {
             }
         })
     }
+
+    fun getIDs(): ArrayList<String>{
+        var childrens = ArrayList<String>()
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase error", "${error.code}: ${error.message}")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.hasChildren()){
+                    snapshot.children.forEach {
+                        childrens.add(snapshot.children.toString())
+                    }
+                }
+            }
+        })
+        return childrens
+    }
 }
