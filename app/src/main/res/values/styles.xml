@@ -57,6 +57,17 @@
         <item name="hintTextColor">@color/colorHint</item>
     </style>
 
+    <style name="CommentEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/shape_edit_text</item>
+        <item name="android:layout_marginStart">30dp</item>
+        <item name="android:layout_marginEnd">30dp</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="hintTextColor">@color/colorHint</item>
+    </style>
+
     <style name="MaterialButtonWhite" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
         <item name="backgroundTint">@color/colorWhite</item>
         <item name="android:textColor">@color/colorPrimary</item>
