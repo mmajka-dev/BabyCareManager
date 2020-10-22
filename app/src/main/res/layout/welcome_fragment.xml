@@ -37,8 +37,8 @@
             style="@style/EditText"
             android:layout_below="@id/baby_name"
             android:layout_centerHorizontal="true"
-            android:inputType="textPersonName"
-            android:hint="Birthday" />
+            android:hint="Birthday"
+            />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/done"
@@ -53,6 +53,7 @@
             />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/code_card"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             app:cardCornerRadius="15dp" android:layout_alignParentBottom="true"
             android:layout_marginEnd="25dp" android:layout_marginStart="25dp">
@@ -91,6 +92,7 @@
                     android:layout_marginEnd="30dp"
                     app:icon="@drawable/ic_check"
                     android:layout_alignParentEnd="true"
+                    app:elevation="0dp"
                     android:text="OK" />
 
             </RelativeLayout>

@@ -13,6 +13,10 @@ import com.mmajka.babycaremanager.databinding.FeedingFragmentBinding
 
 class FeedingFragment : Fragment() {
 
+    /*Jeśli wybrana zostanie lewa albo prawa pierś to ujawnia się timer. Jeśli formula to przycisk play zmienia się w check,
+    timer się ukrywa a pokazuje edit text z dopiskiem ml. Jeśli wybór pada na posiłek to oba są ukryte i zostaje
+    tylko check oraz comment ET
+     */
 
     private lateinit var bindig: FeedingFragmentBinding
     private lateinit var viewModel: FeedingViewModel

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal">
+
+    <Button
+        android:id="@+id/diaper"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_marginEnd="9dp"
+        android:layout_toStartOf="@+id/sleep"
+        android:background="@drawable/shape_action_button"
+        android:scaleType="fitCenter"
+        android:drawableBottom="@drawable/ic_diaper"
+        android:paddingTop="5dp"
+        app:backgroundTint="@color/colorYellow" />
+
+    <Button
+        android:id="@+id/sleep"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_marginEnd="9dp"
+        android:layout_toStartOf="@+id/bath"
+        android:background="@drawable/shape_action_button"
+        android:scaleType="fitCenter"
+        android:drawableBottom="@drawable/ic_sleep"
+        android:paddingTop="1dp"
+        app:backgroundTint="@color/colorPurple" />
+
+    <Button
+        android:id="@+id/bath"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_marginEnd="9dp"
+        android:layout_toStartOf="@+id/feeding"
+        android:background="@drawable/shape_action_button"
+        android:scaleType="fitCenter"
+        android:drawableBottom="@drawable/ic_bathtub"
+        android:paddingTop="1dp"
+        app:backgroundTint="@color/colorBlue" />
+
+    <Button
+        android:id="@+id/feeding"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_marginEnd="9dp"
+        android:layout_toStartOf="@+id/walk"
+        android:background="@drawable/shape_action_button"
+        android:drawableBottom="@drawable/ic_bottle"
+        android:paddingTop="5dp"
+        android:scaleType="fitCenter"
+        app:backgroundTint="@color/colorRed" />
+
+    <Button
+        android:id="@+id/walk"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:layout_marginEnd="9dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/shape_action_button"
+        android:scaleType="fitCenter"
+        android:drawableBottom="@drawable/ic_pram"
+        android:paddingTop="5dp"
+        app:backgroundTint="@color/colorGreen" />
+
+</RelativeLayout>
+</layout>

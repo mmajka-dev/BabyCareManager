@@ -5,7 +5,10 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mmajka.babycaremanager.data.FirebaseSource
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.mmajka.babycaremanager.utils.Utils
 import kotlin.random.Random
 
@@ -13,7 +16,8 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
 
     val utilsInstance = Utils(application.applicationContext)
     val path = utilsInstance.preference.getString("ID","")
-    val firebaseInstance = FirebaseSource(path!!)
+    val firebaseInstance = FirebaseDatabase.getInstance()
+    val ref = firebaseInstance.getReference(path!!)
     var isFirstTime = MutableLiveData<Boolean>()
 
     //Sprawdza czy aplikacja została urouchomiona pierwszy raz czy nie
@@ -22,14 +26,36 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
         return isFirstTime
     }
 
-    //sprawdza czy w bazie istnieje już takie id, jeśli nie, generuje nowe
+    //generuje ID w przypadku pierwszego uruchomienia aplikacji
+    //Jeśli takie id istnieje w bazie generuje nowe aż będzie unikalne
     fun generateID(): String{
-        val list = firebaseInstance.getIDs()
-        var id = Random.nextInt(0, 999999)
+        val list = getIDs()
+        var id = 0
         do {
-            id = Random.nextInt(0, 999999)
+            id = Random.nextInt(100000000, 999999999)
         }while(list.equals(id))
-        Log.i("ID", "$id")
         return id.toString()
+    }
+
+    fun getIDs(): ArrayList<String>{
+        var childrens = ArrayList<String>()
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase error", "${error.code}: ${error.message}")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.hasChildren()){
+                    snapshot.children.forEach {
+                        childrens.add(snapshot.children.toString())
+                    }
+                }
+            }
+        })
+        return childrens
+    }
+
+    fun putID(id: String){
+        utilsInstance.savePreferences(id)
     }
 }

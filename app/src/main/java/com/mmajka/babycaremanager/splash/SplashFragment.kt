@@ -2,6 +2,8 @@ package com.mmajka.babycaremanager.splash
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +17,10 @@ import com.mmajka.babycaremanager.R
 import com.mmajka.babycaremanager.databinding.SplashFragmentBinding
 import com.mmajka.babycaremanager.home.HomeFragment
 import com.mmajka.babycaremanager.utils.Utils
+import com.mmajka.babycaremanager.welcome.WelcomeFragment
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.prefs.Preferences
 
 class SplashFragment : Fragment() {
@@ -33,19 +39,25 @@ class SplashFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(SplashViewModel::class.java)
+
         if (onUserCheck()){
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).disallowAddToBackStack().commit()
         }else{
-            Snackbar.make(bind.root, "Sasin przejebał 70 mln", Snackbar.LENGTH_SHORT).show()
-            //requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, config).disallowAddToBackStack().commit()
+            newID()
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WelcomeFragment()).disallowAddToBackStack().commit()
         }
 
     }
 
     private fun onUserCheck(): Boolean{
-        val id = viewModel.generateID()
         val prefInstance = Utils(context!!)
+        return prefInstance.onUserCheck()
+    }
 
-        return prefInstance.onUserCheck(id)
+    private fun newID(){
+        val id = viewModel.generateID()
+        viewModel.putID(id)
+        Log.i("ID", "$id")
+        Toast.makeText(context, "$id", Toast.LENGTH_SHORT).show()
     }
 }

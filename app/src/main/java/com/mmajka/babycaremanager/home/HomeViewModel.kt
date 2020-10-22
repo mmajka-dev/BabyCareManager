@@ -32,7 +32,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application){
     val actions: LiveData<ArrayList<BasicActionEntity>>
         get() = _actions
 
-    fun getChild(name: TextView){
+
+
+    fun getChild(name: TextView, age : TextView){
         ref.orderByChild("index").addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 Log.i("Error", "${error.message}")
@@ -40,13 +42,16 @@ class HomeViewModel(application: Application) : AndroidViewModel(application){
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 name.setText(snapshot.child("name").value.toString())
+                age.setText(snapshot.child("age").value.toString())
             }
         })
     }
 
     fun getCare(): LiveData<ArrayList<BasicActionEntity>> {
         val items = ArrayList<BasicActionEntity>()
-        refActions.addValueEventListener(object : ValueEventListener {
+        db.setPersistenceEnabled(true)
+        refActions.keepSynced(true)
+        refActions.limitToLast(100).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 Log.i("Error", "${error.message}")
             }
@@ -66,6 +71,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application){
     fun setActions(date: String, time: String, type: String, text: String, duration: String){
         val action = BasicActionEntity(date, time, type, text, duration)
         refActions.child(Date().time.toString()).setValue(action)
+
     }
 
     fun clearList(){

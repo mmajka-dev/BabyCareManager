@@ -14,6 +14,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        supportFragmentManager.beginTransaction().add(R.id.fragment_container, HomeFragment()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fragment_container, SplashFragment()).commit()
     }
 }
