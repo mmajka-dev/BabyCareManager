@@ -8,6 +8,7 @@
     <color name="colorHint">#AEACAC</color>
     <color name="colorText">#605F5F</color>
 
+    <color name="colorTransparent">#00FFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGreen">#6DB67F</color>
     <color name="colorGray">#BFF2F1F1</color>

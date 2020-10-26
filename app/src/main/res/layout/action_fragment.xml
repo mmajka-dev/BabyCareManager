@@ -27,7 +27,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/baby_name"
+                        android:id="@+id/title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Diaper"
@@ -64,18 +64,33 @@
             android:layout_below="@+id/time"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:inputType="textPersonName"
             android:background="@drawable/shape_edit_text"
-            android:hint="Comment" />
+            android:hint="Comment"
+            android:gravity="top|start"
+            android:paddingTop="15dp"
+            />
 
-        <Button
-            android:id="@+id/timer_start"
+        <ImageButton
+            android:id="@+id/submit"
             android:layout_width="109dp"
             android:layout_height="109dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="25dp"
-            android:background="@drawable/ic_check"
-            app:backgroundTint="@color/colorYellow" />
+            android:background="@drawable/ic_check" />
+
+        <ImageButton
+            android:id="@+id/edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_edit"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="3dp"
+            app:tint="@color/colorYellow"
+            android:backgroundTint="@color/colorTransparent"
+            android:layout_below="@id/app_bar"
+            android:layout_toEndOf="@id/time"/>
 
 
     </RelativeLayout>

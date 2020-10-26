@@ -44,7 +44,7 @@ class WelcomeViewModel(application: Application) : AndroidViewModel(application)
             Toast.makeText(context, "$date", Toast.LENGTH_SHORT).show()
             t.setText(date)
         }
-        DatePickerDialog(context, builder, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH), cal.get(Calendar.YEAR)).show()
+        DatePickerDialog(context, builder, calYear, calMonth, calDay).show()
 
     }
 }

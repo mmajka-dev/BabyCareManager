@@ -15,6 +15,7 @@
             android:backgroundTint="@color/colorYellow"
             >
             <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:navigationIcon="@drawable/ic_back"
@@ -50,28 +51,32 @@
             android:gravity="center_horizontal"
             android:layout_below="@+id/app_bar"
             android:layout_marginTop="12dp"
+            android:padding="10dp"
             >
 
             <Button
-                android:id="@+id/formula"
+                android:id="@+id/poo"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
-                android:layout_toStartOf="@+id/meal"
+                android:padding="2dp"
+                android:layout_toStartOf="@+id/pee"
                 android:background="@drawable/shape_action_button"
+                android:foreground="@drawable/ripple"
                 app:backgroundTint="@color/colorRed"
                 android:text="Poo"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:paddingTop="8dp"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="15dp"/>
 
             <Button
-                android:id="@+id/meal"
+                android:id="@+id/pee"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
                 android:layout_alignParentEnd="true"
                 app:backgroundTint="@color/colorYellow"
                 android:text="Pee"
+                android:foreground="@drawable/ripple"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:paddingTop="8dp"
@@ -84,6 +89,7 @@
             android:layout_height="wrap_content"
             style="@style/WelcomeScreenTitle"
             android:textSize="60sp"
+            android:layout_marginTop="10dp"
             android:layout_below="@id/buttons"
             android:textColor="@color/colorYellow"
             android:text="00:00"
@@ -98,10 +104,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/shape_edit_text"
-            android:hint="Comment" />
+            android:hint="Comment"
+            android:inputType="textPersonName"
+            android:gravity="top|start"
+            android:paddingTop="15dp"/>
 
             <Button
-                android:id="@+id/timer_start"
+                android:id="@+id/submit"
                 android:layout_width="109dp"
                 android:layout_height="109dp"
                 android:layout_alignParentBottom="true"
@@ -110,6 +119,16 @@
                 android:background="@drawable/ic_check"
                 app:backgroundTint="@color/colorYellow" />
 
-
+        <ImageButton
+            android:id="@+id/edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_toEndOf="@id/time"
+            android:backgroundTint="@color/colorTransparent"
+            app:srcCompat="@drawable/ic_edit"
+            android:layout_below="@+id/buttons"
+            android:layout_marginTop="40dp"
+            app:tint="@color/colorYellow" />
     </RelativeLayout>
 </layout>

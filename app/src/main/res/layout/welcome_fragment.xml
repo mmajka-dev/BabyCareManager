@@ -32,11 +32,12 @@
             android:inputType="textPersonName"
             android:hint="Name" />
 
-        <EditText
+        <TextView
             android:id="@+id/birthday"
             style="@style/EditText"
             android:layout_below="@id/baby_name"
             android:layout_centerHorizontal="true"
+            android:foreground="@drawable/ripple"
             android:hint="Birthday"
             />
 
