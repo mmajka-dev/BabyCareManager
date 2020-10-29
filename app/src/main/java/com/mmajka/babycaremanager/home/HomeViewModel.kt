@@ -32,6 +32,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application){
     val actions: LiveData<ArrayList<BasicActionEntity>>
         get() = _actions
 
+    var _today = MutableLiveData<ArrayList<BasicActionEntity>>()
+    val actoday: LiveData<ArrayList<BasicActionEntity>>
+        get() = _today
 
 
     fun getChild(name: TextView, age : TextView){
@@ -65,6 +68,36 @@ class HomeViewModel(application: Application) : AndroidViewModel(application){
             }
         })
         return _actions
+    }
+
+    fun getToday(): LiveData<ArrayList<BasicActionEntity>> {
+        val items = ArrayList<BasicActionEntity>()
+        refActions.keepSynced(true)
+        refActions.orderByChild("date").equalTo(getDate()).limitToLast(3).addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+                Log.i("Error", "${error.message}")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                items.clear()
+                for(i in snapshot.children) {
+                    val item = i.getValue(BasicActionEntity::class.java)
+                    items.add(item!!)
+                    _today.value = items
+                }
+            }
+        })
+        return _today
+    }
+
+    fun getDate(): String{
+        val cal = Calendar.getInstance()
+        val day = cal.get(Calendar.DAY_OF_MONTH)
+        val month = cal.get(Calendar.MONTH)+1
+        val year = cal.get(Calendar.YEAR)
+        val date = "$year-$month-$day"
+
+        return date
     }
 
     fun setActions(date: String, time: String, type: String, text: String, duration: String){

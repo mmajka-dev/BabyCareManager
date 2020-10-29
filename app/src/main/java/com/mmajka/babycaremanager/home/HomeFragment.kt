@@ -17,6 +17,7 @@ import com.mmajka.babycaremanager.actions.ActionFragment
 import com.mmajka.babycaremanager.databinding.HomeFragmentBinding
 import com.mmajka.babycaremanager.diaper.DiaperFragment
 import com.mmajka.babycaremanager.feeding.FeedingFragment
+import com.mmajka.babycaremanager.invite.InviteFragment
 
 class HomeFragment : Fragment() {
 
@@ -35,16 +36,12 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        var container = R.id.fragment_container
+        val container = R.id.fragment_container
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         viewModel.getChild(binding.babyName, binding.age)
 
-        setupRecycler()
-
-//        viewModel.actions.observe(viewLifecycleOwner, Observer { newActions ->
-//            binding.activitiesRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//            binding.activitiesRv.adapter = ActivityAdapter(newActions)
-//        })
+        setupActivitiesRecycler()
+        setupTodayRecycler()
 
         binding.inventoryRv.diaper.setOnClickListener {
             CURRENT_ACTIVITY = "Diaper"
@@ -72,15 +69,19 @@ class HomeFragment : Fragment() {
             requireActivity().supportFragmentManager.beginTransaction().replace(container, ActionFragment()).addToBackStack("").commit()
         }
 
-        binding.lastCard.setOnClickListener {
+        binding.tdFullscreen.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction().replace(container, AllTodayFragment()).addToBackStack("").commit()
+        }
+        binding.acFullscreen.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction().replace(container, AllActions()).addToBackStack("").commit()
         }
-        binding.activitiesRv.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(container, AllActions()).addToBackStack("").commit()
+
+        binding.invite.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction().replace(container, InviteFragment()).addToBackStack("").commit()
         }
     }
 
-    private fun setupRecycler(){
+    private fun setupActivitiesRecycler(){
         viewModel.getCare()
         viewModel.actions.observe(viewLifecycleOwner, Observer {
             binding.activitiesRv.adapter = ActivityAdapter((it))
@@ -88,6 +89,17 @@ class HomeFragment : Fragment() {
             layoutManager.reverseLayout = true
             layoutManager.stackFromEnd = true
             binding.activitiesRv.layoutManager = layoutManager
+        })
+    }
+
+    private fun setupTodayRecycler(){
+        viewModel.getToday()
+        viewModel.actoday.observe(viewLifecycleOwner, Observer {
+            binding.summaryRv.adapter = ActivityAdapter((it))
+            val layoutManager = LinearLayoutManager(binding.root.context)
+            layoutManager.reverseLayout = true
+            layoutManager.stackFromEnd = true
+            binding.summaryRv.layoutManager = layoutManager
         })
     }
 
