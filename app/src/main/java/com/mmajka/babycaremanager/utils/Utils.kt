@@ -10,6 +10,7 @@ class Utils(context: Context) {
     private var PRIVATE_MODE = 0
     private val PREFERENCE_NAME = "ID_VALUE"
     private val ID = "ID"
+    private val IS_CONFIGURED = "isConfigured"
 
     val preference = context!!.getSharedPreferences(PREFERENCE_NAME, PRIVATE_MODE)
 
@@ -24,9 +25,25 @@ class Utils(context: Context) {
             return true
         }
     }
+
+    fun onConfigCheck(): Boolean{
+        val config = preference.getString(IS_CONFIGURED, "")
+        if (config!!.isEmpty()){
+            Log.i("CHECK: ", "${preference.getString(IS_CONFIGURED, "")}")
+            return false
+        }else{
+            Log.i("CHECK: ", "${preference.getString(IS_CONFIGURED, "")}")
+            return true
+        }
+    }
+
     //Zapis  bazy do sharedPrefs
     fun savePreferences(id: String?){
         preference.edit().putString(ID, id).apply()
+    }
+
+    fun isConfigured(isConfigured: String){
+        preference.edit().putString(IS_CONFIGURED, isConfigured).apply()
     }
 
     fun encrypt(a: String){

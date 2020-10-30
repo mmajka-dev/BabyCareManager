@@ -20,12 +20,6 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
     val ref = firebaseInstance.getReference(path!!)
     var isFirstTime = MutableLiveData<Boolean>()
 
-    //Sprawdza czy aplikacja została urouchomiona pierwszy raz czy nie
-    fun onFirstTime(): LiveData<Boolean> {
-        isFirstTime.value = path == null
-        return isFirstTime
-    }
-
     //generuje ID w przypadku pierwszego uruchomienia aplikacji
     //Jeśli takie id istnieje w bazie generuje nowe aż będzie unikalne
     fun generateID(): String{

@@ -75,11 +75,20 @@ class FeedingFragment : Fragment() {
             val duration = binding.timer.text.toString()
             viewModel.onTimerStop(binding.timer)
             viewModel.setActions("Feeding", "$title $info", duration )
+            requireActivity().onBackPressed()
             binding.timerStart.visibility = View.VISIBLE
             binding.timerPause.visibility = View.GONE
             binding.timerStop.visibility = View.GONE
             Log.i("Timer Stop", "${viewModel.minutes}:${viewModel.seconds}")
             unlockButtons()
+        }
+
+        binding.submit.setOnClickListener {
+            val title = binding.acTitle.text.toString()
+            val info = binding.comment.text.toString()
+            viewModel.onTimerStop(binding.timer)
+            viewModel.setActions("Feeding", "$title $info", "" )
+            requireActivity().onBackPressed()
         }
     }
 
@@ -111,12 +120,14 @@ class FeedingFragment : Fragment() {
             binding.acTitle.setText("Formula")
             binding.timerStart.visibility = View.GONE
             binding.submit.visibility = View.VISIBLE
+            binding.timer.text = viewModel.getTime()
         }
         binding.meal.setOnClickListener {
             isChoosed = true
             binding.acTitle.setText("Meal")
             binding.timerStart.visibility = View.GONE
             binding.submit.visibility = View.VISIBLE
+            binding.timer.text = viewModel.getTime()
         }
     }
 

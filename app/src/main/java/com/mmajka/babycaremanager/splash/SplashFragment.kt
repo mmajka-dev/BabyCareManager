@@ -39,19 +39,21 @@ class SplashFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(SplashViewModel::class.java)
-
-        if (onUserCheck()){
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).disallowAddToBackStack().commit()
-        }else{
-            newID()
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WelcomeFragment()).disallowAddToBackStack().commit()
-        }
-
+        val check = onUserCheck()
+        Log.i("CHECK2", "$check")
+            if (check){
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).disallowAddToBackStack().commit()
+            }else{
+                newID()
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WelcomeFragment()).disallowAddToBackStack().commit()
+            }
     }
 
     private fun onUserCheck(): Boolean{
-        val prefInstance = Utils(context!!)
-        return prefInstance.onUserCheck()
+        val utilsInstance = Utils(context!!)
+        val check = utilsInstance.onConfigCheck()
+        Log.i("CHECK", "$check")
+        return check
     }
 
     private fun newID(){

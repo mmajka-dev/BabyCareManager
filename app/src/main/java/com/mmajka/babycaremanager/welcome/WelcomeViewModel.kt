@@ -3,6 +3,7 @@ package com.mmajka.babycaremanager.welcome
 import android.app.Application
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
@@ -30,6 +31,10 @@ class WelcomeViewModel(application: Application) : AndroidViewModel(application)
         prefInstance.savePreferences(id)
     }
 
+    fun onConfigureChange(isConfigured: String){
+        prefInstance.isConfigured(isConfigured)
+    }
+
     fun callDatePicker(context: Context, t: TextView){
         val cal = Calendar.getInstance()
         var calDay = cal.get(Calendar.DAY_OF_MONTH)
@@ -47,4 +52,6 @@ class WelcomeViewModel(application: Application) : AndroidViewModel(application)
         DatePickerDialog(context, builder, calYear, calMonth, calDay).show()
 
     }
+
+
 }

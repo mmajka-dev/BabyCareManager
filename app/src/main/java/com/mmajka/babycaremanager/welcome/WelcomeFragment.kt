@@ -1,7 +1,9 @@
 package com.mmajka.babycaremanager.welcome
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,6 +21,11 @@ import kotlinx.android.synthetic.main.invite_fragment.view.*
 
 class WelcomeFragment : Fragment() {
 
+    companion object {
+        private val REQUEST_TAKE_PHOTO = 0
+        private val REQUEST_SELECT_IMAGE_IN_ALBUM = 1
+    }
+
     private lateinit var viewModel: WelcomeViewModel
     private lateinit var binding: WelcomeFragmentBinding
 
@@ -35,6 +42,7 @@ class WelcomeFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(WelcomeViewModel::class.java)
         binding.done.setOnClickListener {
             setChildInfo()
+            setConfigured()
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).disallowAddToBackStack().commit()
         }
 
@@ -48,7 +56,12 @@ class WelcomeFragment : Fragment() {
         }
         binding.okCode.setOnClickListener {
             putID()
+            setConfigured()
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).disallowAddToBackStack().commit()
+        }
+
+        binding.photo.setOnClickListener {
+            openGalleryForPickingImage(1)
         }
     }
 
@@ -64,9 +77,23 @@ class WelcomeFragment : Fragment() {
         viewModel.putID(id)
     }
 
+    private fun setConfigured(){
+        val isConfigured = "true"
+        viewModel.onConfigureChange(isConfigured)
+    }
+
     private fun getDate(){
         val t = binding.birthday
         viewModel.callDatePicker(context!!, t)
     }
 
+    fun Fragment.openGalleryForPickingImage(code: Int) {
+        var path = "nic"
+        Intent(
+            Intent.ACTION_PICK,
+            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        ).apply {
+            startActivityForResult(Intent.createChooser(this, getString(R.string.seletc_image)), code)
+        }
+    }
 }

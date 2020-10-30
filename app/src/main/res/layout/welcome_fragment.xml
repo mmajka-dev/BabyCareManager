@@ -24,11 +24,22 @@
         android:gravity="top|center"
         android:background="@drawable/splash_background">
 
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="15dp"
+            app:srcCompat="@drawable/ic_boy"
+            android:background="@drawable/shape_photo_bg"
+            android:layout_centerHorizontal="true"
+            />
+
         <EditText
             android:id="@+id/baby_name"
             style="@style/EditText"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
+            android:layout_below="@+id/photo"
             android:inputType="textPersonName"
             android:hint="Name" />
 
@@ -57,7 +68,8 @@
             android:id="@+id/code_card"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             app:cardCornerRadius="15dp" android:layout_alignParentBottom="true"
-            android:layout_marginEnd="25dp" android:layout_marginStart="25dp">
+            android:layout_marginEnd="25dp" android:layout_marginStart="25dp"
+            android:layout_marginBottom="5dp">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -99,6 +111,8 @@
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
+
+
 
     </RelativeLayout>
 </RelativeLayout>
