@@ -1,16 +1,13 @@
 package com.mmajka.babycaremanager.feeding
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mmajka.babycaremanager.R
@@ -73,8 +70,9 @@ class FeedingFragment : Fragment() {
             val title = binding.acTitle.text.toString()
             val info = binding.comment.text.toString()
             val duration = binding.timer.text.toString()
+            val time = binding.timer.text.toString()
             viewModel.onTimerStop(binding.timer)
-            viewModel.setActions("Feeding", "$title $info", duration )
+            viewModel.setActions("Feeding", "$title $info", duration, time )
             requireActivity().onBackPressed()
             binding.timerStart.visibility = View.VISIBLE
             binding.timerPause.visibility = View.GONE
@@ -86,9 +84,14 @@ class FeedingFragment : Fragment() {
         binding.submit.setOnClickListener {
             val title = binding.acTitle.text.toString()
             val info = binding.comment.text.toString()
+            val time = binding.timer.text.toString()
             viewModel.onTimerStop(binding.timer)
-            viewModel.setActions("Feeding", "$title $info", "" )
+            viewModel.setActions("Feeding", "$title $info", "", time )
             requireActivity().onBackPressed()
+        }
+
+        binding.edit.setOnClickListener {
+            viewModel.callTimePicker(context!!, binding.timer)
         }
     }
 
@@ -108,18 +111,21 @@ class FeedingFragment : Fragment() {
             binding.acTitle.setText("Left")
             binding.timerStart.visibility = View.VISIBLE
             binding.submit.visibility = View.GONE
+            binding.edit.visibility = View.GONE
         }
         binding.right.setOnClickListener {
             isChoosed = true
             binding.acTitle.setText("Right")
             binding.timerStart.visibility = View.VISIBLE
             binding.submit.visibility = View.GONE
+            binding.edit.visibility = View.GONE
         }
         binding.formula.setOnClickListener {
             isChoosed = true
             binding.acTitle.setText("Formula")
             binding.timerStart.visibility = View.GONE
             binding.submit.visibility = View.VISIBLE
+            binding.edit.visibility = View.VISIBLE
             binding.timer.text = viewModel.getTime()
         }
         binding.meal.setOnClickListener {
@@ -127,6 +133,7 @@ class FeedingFragment : Fragment() {
             binding.acTitle.setText("Meal")
             binding.timerStart.visibility = View.GONE
             binding.submit.visibility = View.VISIBLE
+            binding.edit.visibility = View.VISIBLE
             binding.timer.text = viewModel.getTime()
         }
     }

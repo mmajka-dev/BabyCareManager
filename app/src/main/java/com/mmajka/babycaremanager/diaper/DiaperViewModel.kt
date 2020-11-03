@@ -6,7 +6,6 @@ import android.content.Context
 import android.util.Log
 import android.widget.TextView
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import com.google.firebase.database.FirebaseDatabase
 import com.mmajka.babycaremanager.data.BasicActionEntity
 import com.mmajka.babycaremanager.utils.Utils

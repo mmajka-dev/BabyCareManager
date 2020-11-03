@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mmajka.babycaremanager.R
 import com.mmajka.babycaremanager.data.BasicActionEntity
-import kotlinx.android.synthetic.main.single_activity.view.*
+import com.mmajka.babycaremanager.utils.onClickListener
 import kotlinx.android.synthetic.main.single_activity_full.view.*
 
-class FullActivityAdapter(val actions: ArrayList<BasicActionEntity>): RecyclerView.Adapter<FullActivityViewHolder>() {
+class FullActivityAdapter(val actions: ArrayList<BasicActionEntity>, val onClickListener: onClickListener): RecyclerView.Adapter<FullActivityViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FullActivityViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.single_activity_full, parent, false)
@@ -23,11 +23,11 @@ class FullActivityAdapter(val actions: ArrayList<BasicActionEntity>): RecyclerVi
         val duration = holder.duration
         val durationTxt = holder.durationTxt
         val card = holder.card
-        holder.bind(bind)
+        holder.bind(bind, onClickListener)
+
         when(actions.get(position).title){
             "Diaper" -> {
                 image.setImageResource(R.drawable.ic_diaper_rv)
-
                 card.setCardBackgroundColor(Color.parseColor("#F2C06C"))
             }
             "Feeding" -> {
@@ -66,11 +66,20 @@ class FullActivityViewHolder(view: View): RecyclerView.ViewHolder(view){
     val durationTxt = itemView.duration_txt
     val comment = itemView.full_comment
 
-    fun bind(action: BasicActionEntity){
+    fun bind(action: BasicActionEntity, onClickListener: onClickListener){
         title.text = action.title
         time.text = action.time
         date.text = action.date
         comment.text = action.info
         duration.text = action.duration
+
+        itemView.setOnClickListener {
+            onClickListener.onClick(adapterPosition, itemView, action)
+        }
+
+        itemView.setOnLongClickListener {
+            onClickListener.onLongClick(adapterPosition, itemView, action)
+            return@setOnLongClickListener true
+        }
     }
 }

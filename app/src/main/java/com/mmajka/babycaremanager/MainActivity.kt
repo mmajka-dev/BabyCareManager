@@ -1,14 +1,10 @@
 package com.mmajka.babycaremanager
 
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.google.android.material.appbar.MaterialToolbar
 import com.mmajka.babycaremanager.databinding.ActivityMainBinding
-import com.mmajka.babycaremanager.diaper.DiaperFragment
-import com.mmajka.babycaremanager.home.HomeFragment
 import com.mmajka.babycaremanager.splash.SplashFragment
 
 class MainActivity : AppCompatActivity() {

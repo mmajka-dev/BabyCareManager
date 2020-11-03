@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.mmajka.babycaremanager.utils.Utils
 
 class InviteViewModel(application: Application): AndroidViewModel(application) {
@@ -24,7 +23,7 @@ class InviteViewModel(application: Application): AndroidViewModel(application) {
 
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.setType("text/plain").
-        putExtra(Intent.EXTRA_TEXT, "Hi! You have been invited to use BabyCare app and take care together about child. Your code is: $path")
+        putExtra(Intent.EXTRA_TEXT, "Hi! You have been invited to use BabyCare app and take care together about child.\n Your code is: $path")
         return shareIntent
     }
 }

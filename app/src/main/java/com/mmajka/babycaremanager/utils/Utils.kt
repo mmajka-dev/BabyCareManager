@@ -1,10 +1,9 @@
 package com.mmajka.babycaremanager.utils
 
 import android.content.Context
+import android.net.Uri
 import android.util.Log
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import androidx.core.net.toUri
 
 class Utils(context: Context) {
     private var PRIVATE_MODE = 0
@@ -44,6 +43,16 @@ class Utils(context: Context) {
 
     fun isConfigured(isConfigured: String){
         preference.edit().putString(IS_CONFIGURED, isConfigured).apply()
+    }
+
+    fun setPhotoPath(path: Uri){
+        preference.edit().putString("PHOTO_PATH", path.toString()).apply()
+    }
+
+    fun getPhotoPath(): Uri{
+        val path = preference.getString("PHOTO_PATH", "")?.toUri()
+        Log.i("URI", "$path")
+        return path!!
     }
 
     fun encrypt(a: String){

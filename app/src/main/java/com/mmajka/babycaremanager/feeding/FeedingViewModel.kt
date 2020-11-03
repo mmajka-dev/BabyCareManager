@@ -1,21 +1,18 @@
 package com.mmajka.babycaremanager.feeding
 
 import android.app.Application
+import android.app.TimePickerDialog
 import android.content.Context
-import android.os.SystemClock
-import android.provider.Settings
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.google.firebase.database.FirebaseDatabase
 import com.mmajka.babycaremanager.data.BasicActionEntity
 import com.mmajka.babycaremanager.utils.Utils
-import kotlinx.coroutines.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class FeedingViewModel(application: Application) : AndroidViewModel(application) {
@@ -33,8 +30,8 @@ class FeedingViewModel(application: Application) : AndroidViewModel(application)
     val timer: LiveData<Boolean>
     get() = _timer
 
-    fun setActions(title: String, info: String, duration: String){
-        val action = BasicActionEntity(title, getDate(), getTime(), info, duration)
+    fun setActions(title: String, info: String, duration: String, time: String){
+        val action = BasicActionEntity(title, getDate(), time, info, duration)
         refActions.child(Date().time.toString()).setValue(action)
     }
 
@@ -107,6 +104,20 @@ class FeedingViewModel(application: Application) : AndroidViewModel(application)
     private fun unscaleIcon(view: Button){
         view.scaleX = 1.0F
         view.scaleY = 1.0F
+    }
+
+    fun callTimePicker(context: Context, textView: TextView){
+        val cal = Calendar.getInstance()
+        var time = ""
+        val builder = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+
+            cal.set(Calendar.HOUR_OF_DAY, hourOfDay)
+            cal.set(Calendar.MINUTE, minute)
+            time = SimpleDateFormat("HH:mm").format(cal.time)
+            textView.text = time
+        }
+        TimePickerDialog(context, builder, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+
     }
 
 }

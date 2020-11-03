@@ -102,14 +102,15 @@
             android:layout_height="145dp"
             android:layout_below="@+id/time"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="33dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/shape_edit_text"
+            android:gravity="top|start"
             android:hint="Comment"
             android:inputType="textPersonName"
-            android:gravity="top|start"
-            android:paddingTop="15dp"/>
+            android:paddingTop="15dp" />
 
-            <Button
+        <Button
                 android:id="@+id/submit"
                 android:layout_width="109dp"
                 android:layout_height="109dp"

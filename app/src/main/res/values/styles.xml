@@ -6,7 +6,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/righteous</item>
+
     </style>
+
+
     
     <style name="SplashScreenTitle" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">55sp</item>

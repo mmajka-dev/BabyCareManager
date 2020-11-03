@@ -3,13 +3,10 @@ package com.mmajka.babycaremanager.welcome
 import android.app.Application
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.Intent
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import com.google.firebase.database.FirebaseDatabase
-
 import com.mmajka.babycaremanager.data.child
 import com.mmajka.babycaremanager.utils.Utils
 import java.text.SimpleDateFormat
@@ -52,6 +49,5 @@ class WelcomeViewModel(application: Application) : AndroidViewModel(application)
         DatePickerDialog(context, builder, calYear, calMonth, calDay).show()
 
     }
-
 
 }

@@ -1,12 +1,12 @@
 package com.mmajka.babycaremanager.home
 
 import android.app.Application
+import android.net.Uri
 import android.util.Log
 import android.widget.TextView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -100,14 +100,13 @@ class HomeViewModel(application: Application) : AndroidViewModel(application){
         return date
     }
 
-    fun setActions(date: String, time: String, type: String, text: String, duration: String){
-        val action = BasicActionEntity(date, time, type, text, duration)
-        refActions.child(Date().time.toString()).setValue(action)
-
-    }
-
     fun clearList(){
         refActions.removeValue()
         _actions.value!!.clear()
+    }
+
+    fun getPhotoPath(): Uri {
+        val photo = prefInstance.getPhotoPath()
+        return photo
     }
 }

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mmajka.babycaremanager.R
 import com.mmajka.babycaremanager.data.BasicActionEntity
+import com.mmajka.babycaremanager.utils.onClickListener
 import kotlinx.android.synthetic.main.single_activity.view.*
 
 class ActivityAdapter(val actions: ArrayList<BasicActionEntity>): RecyclerView.Adapter<ActivityViewHolder>() {
@@ -51,5 +52,7 @@ class ActivityViewHolder(view: View): RecyclerView.ViewHolder(view){
     fun bind(action: BasicActionEntity){
         title.text = action.title
         time.text = action.time
+
     }
 }
+

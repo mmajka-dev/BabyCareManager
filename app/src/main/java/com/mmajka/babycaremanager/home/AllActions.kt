@@ -1,19 +1,20 @@
 package com.mmajka.babycaremanager.home
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mmajka.babycaremanager.R
+import com.mmajka.babycaremanager.data.BasicActionEntity
 import com.mmajka.babycaremanager.databinding.AllActionsFragmentBinding
-import com.mmajka.babycaremanager.databinding.DiaperFragmentBinding
+import com.mmajka.babycaremanager.utils.onClickListener
 
-class AllActions : Fragment() {
+class AllActions : Fragment(), onClickListener {
 
     private lateinit var viewModel: AllActionsViewModel
     private lateinit var binding: AllActionsFragmentBinding
@@ -51,7 +52,15 @@ class AllActions : Fragment() {
             layoutManager.reverseLayout = true
             layoutManager.stackFromEnd = true
             binding.allRecyclerView.layoutManager = layoutManager
-            binding.allRecyclerView.adapter = FullActivityAdapter(it)
+            binding.allRecyclerView.adapter = FullActivityAdapter(it, this)
         })
+    }
+
+    override fun onClick(position: Int, view: View, action: BasicActionEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onLongClick(position: Int, view: View, action: BasicActionEntity) {
+        TODO("Not yet implemented")
     }
 }
