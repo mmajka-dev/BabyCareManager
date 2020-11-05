@@ -47,7 +47,6 @@ class WelcomeViewModel(application: Application) : AndroidViewModel(application)
             t.setText(date)
         }
         DatePickerDialog(context, builder, calYear, calMonth, calDay).show()
-
     }
 
 }

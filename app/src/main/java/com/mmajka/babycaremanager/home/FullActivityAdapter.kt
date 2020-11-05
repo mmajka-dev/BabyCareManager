@@ -65,6 +65,7 @@ class FullActivityViewHolder(view: View): RecyclerView.ViewHolder(view){
     val duration = itemView.duration
     val durationTxt = itemView.duration_txt
     val comment = itemView.full_comment
+    val id = itemView.action_id
 
     fun bind(action: BasicActionEntity, onClickListener: onClickListener){
         title.text = action.title
@@ -72,6 +73,7 @@ class FullActivityViewHolder(view: View): RecyclerView.ViewHolder(view){
         date.text = action.date
         comment.text = action.info
         duration.text = action.duration
+        id.text = action.id
 
         itemView.setOnClickListener {
             onClickListener.onClick(adapterPosition, itemView, action)

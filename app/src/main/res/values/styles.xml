@@ -38,7 +38,7 @@
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:layout_marginStart">88dp</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">23sp</item>
     </style>
 
     <style name="CodeTextStyle" parent="Widget.AppCompat.TextView">
@@ -109,5 +109,9 @@
         <item name="android:backgroundTint">@color/colorPrimary</item>
     </style>
 
+    <style name="SettingsTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
 
 </resources>

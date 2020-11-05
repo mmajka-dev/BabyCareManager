@@ -42,8 +42,9 @@ class ActionViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun setActions(date: String, time: String, title: String, info: String, duration: String){
-        val action = BasicActionEntity(title, date, time, info, duration)
-        refActions.child(Date().time.toString()).setValue(action)
+        val id = Date().time.toString()
+        val action = BasicActionEntity(id, title, date, time, info, duration)
+        refActions.child(id).setValue(action)
     }
 
     fun callTimePicker(context: Context, textView: TextView){

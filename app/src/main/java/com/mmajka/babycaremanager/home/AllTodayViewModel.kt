@@ -2,6 +2,7 @@ package com.mmajka.babycaremanager.home
 
 import android.app.Application
 import android.util.Log
+import android.widget.TextView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -54,6 +55,11 @@ class AllTodayViewModel(application: Application) : AndroidViewModel(application
         val date = "$year-$month-$day"
 
         return date
+    }
+
+    fun deleteAction(id: String, position: Int){
+        refActions.child(id).removeValue()
+        _today.value!!.removeAt(position)
     }
 
 }

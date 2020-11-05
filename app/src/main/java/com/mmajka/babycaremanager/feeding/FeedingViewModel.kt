@@ -31,8 +31,9 @@ class FeedingViewModel(application: Application) : AndroidViewModel(application)
     get() = _timer
 
     fun setActions(title: String, info: String, duration: String, time: String){
-        val action = BasicActionEntity(title, getDate(), time, info, duration)
-        refActions.child(Date().time.toString()).setValue(action)
+        val id = Date().time.toString()
+        val action = BasicActionEntity(id, title, getDate(), time, info, duration)
+        refActions.child(id).setValue(action)
     }
 
     fun getDate(): String{

@@ -24,6 +24,7 @@ import com.mmajka.babycaremanager.databinding.HomeFragmentBinding
 import com.mmajka.babycaremanager.diaper.DiaperFragment
 import com.mmajka.babycaremanager.feeding.FeedingFragment
 import com.mmajka.babycaremanager.invite.InviteFragment
+import com.mmajka.babycaremanager.settings.SettingsFragment
 import com.mmajka.babycaremanager.utils.onClickListener
 import kotlinx.android.synthetic.main.home_fragment.*
 
@@ -109,7 +110,7 @@ class HomeFragment : Fragment() {
         binding.invite.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction().replace(
                 container,
-                InviteFragment()
+                SettingsFragment()
             ).addToBackStack("").commit()
         }
     }
