@@ -4,8 +4,11 @@ import android.app.Application
 import android.app.TimePickerDialog
 import android.content.Context
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.FirebaseDatabase
 import com.mmajka.babycaremanager.data.BasicActionEntity
 import com.mmajka.babycaremanager.utils.Utils
@@ -17,6 +20,14 @@ class DiaperViewModel(application: Application) : AndroidViewModel(application) 
     val prefInstance = Utils(application.applicationContext)
     val path = prefInstance.preference.getString("ID", "")
     val refActions = db.getReference(path!!).child("actions")
+
+    var _isPooSelected = MutableLiveData<Boolean>()
+    val isPooSelected: LiveData<Boolean>
+        get() = _isPooSelected
+
+    var _isPeeSelected = MutableLiveData<Boolean>()
+    val isPeeSelected: LiveData<Boolean>
+    get() = _isPeeSelected
 
     fun getTime(): String{
         val cal = Calendar.getInstance()
@@ -58,6 +69,5 @@ class DiaperViewModel(application: Application) : AndroidViewModel(application) 
             textView.text = time
         }
         TimePickerDialog(context, builder, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
-
     }
 }

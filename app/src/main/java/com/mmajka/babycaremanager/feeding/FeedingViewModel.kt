@@ -28,7 +28,23 @@ class FeedingViewModel(application: Application) : AndroidViewModel(application)
 
     var _timer = MutableLiveData<Boolean>()
     val timer: LiveData<Boolean>
-    get() = _timer
+        get() = _timer
+
+    var _isLeftSelected = MutableLiveData<Boolean>()
+    val isLeftSelected: LiveData<Boolean>
+        get() = _isLeftSelected
+
+    var _isRightSelected = MutableLiveData<Boolean>()
+    val isRightSelected: LiveData<Boolean>
+        get() = _isRightSelected
+
+    var _isFormulaSelected = MutableLiveData<Boolean>()
+    val isFormulaSelected: LiveData<Boolean>
+        get() = _isFormulaSelected
+
+    var _isMealSelected = MutableLiveData<Boolean>()
+    val isMealSelected: LiveData<Boolean>
+        get() = _isMealSelected
 
     fun setActions(title: String, info: String, duration: String, time: String){
         val id = Date().time.toString()

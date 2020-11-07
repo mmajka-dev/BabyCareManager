@@ -25,6 +25,13 @@ class ActionFragment : Fragment() {
     private lateinit var viewModel: ActionViewModel
     private lateinit var binding: ActionFragmentBinding
 
+    private lateinit var id: String
+    private lateinit var title: String
+    private lateinit var info: String
+    private lateinit var date: String
+    private lateinit var time: String
+    private lateinit var duration: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +43,22 @@ class ActionFragment : Fragment() {
             requireActivity().onBackPressed()
         }
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val bundle = arguments
+        if (bundle != null){
+            id = bundle.getString("id")!!
+            title = bundle.getString("title")!!
+            info = bundle.getString("info")!!
+            date = bundle.getString("date")!!
+            time = bundle.getString("time")!!
+            duration = bundle.getString("duration")!!
+
+            binding.time.text = time
+            binding.comment.setText(info)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -87,4 +110,5 @@ class ActionFragment : Fragment() {
         val time = viewModel.getTime()
         return time
     }
+
 }

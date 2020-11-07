@@ -12,6 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mmajka.babycaremanager.R
 import com.mmajka.babycaremanager.databinding.FeedingFragmentBinding
+import kotlinx.android.synthetic.main.action_fragment.*
+import kotlinx.android.synthetic.main.feeding_fragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -41,12 +43,49 @@ class FeedingFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(FeedingViewModel::class.java)
         if (!isChoosed) binding.timerStart.isClickable = false
+        viewModel._isLeftSelected.value = true
+        viewModel._isRightSelected.value = false
+        viewModel._isFormulaSelected.value = false
+        viewModel._isMealSelected.value = false
         onButtonsClick()
 
         viewModel._time.observe(viewLifecycleOwner, Observer { newTime ->
             binding.timer.setText(newTime)
         })
 
+        viewModel._isLeftSelected.observe(viewLifecycleOwner, Observer { isSelected ->
+            if (isSelected){
+                scaleView(left)
+                timer.text = "00:00"
+            }else{
+                unscaleView(left)
+            }
+        })
+
+        viewModel._isRightSelected.observe(viewLifecycleOwner, Observer { isSelected ->
+            if (isSelected){
+                scaleView(right)
+                timer.text = "00:00"
+            }else{
+                unscaleView(right)
+            }
+        })
+
+        viewModel._isFormulaSelected.observe(viewLifecycleOwner, Observer { isSelected ->
+            if (isSelected){
+                scaleView(formula)
+            }else{
+                unscaleView(formula)
+            }
+        })
+
+        viewModel._isMealSelected.observe(viewLifecycleOwner, Observer { isSelected ->
+            if (isSelected){
+                scaleView(meal)
+            }else{
+                unscaleView(meal)
+            }
+        })
         binding.toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
         }
@@ -70,9 +109,9 @@ class FeedingFragment : Fragment() {
             val title = binding.acTitle.text.toString()
             val info = binding.comment.text.toString()
             val duration = binding.timer.text.toString()
-            val time = binding.timer.text.toString()
+            val time = viewModel.getTime()
             viewModel.onTimerStop(binding.timer)
-            viewModel.setActions("Feeding", "$title $info", duration, time )
+            viewModel.setActions("Feeding", "$title $info", duration, time)
             requireActivity().onBackPressed()
             binding.timerStart.visibility = View.VISIBLE
             binding.timerPause.visibility = View.GONE
@@ -112,6 +151,10 @@ class FeedingFragment : Fragment() {
             binding.timerStart.visibility = View.VISIBLE
             binding.submit.visibility = View.GONE
             binding.edit.visibility = View.GONE
+            viewModel._isLeftSelected.value = true
+            viewModel._isRightSelected.value = false
+            viewModel._isFormulaSelected.value = false
+            viewModel._isMealSelected.value = false
         }
         binding.right.setOnClickListener {
             isChoosed = true
@@ -119,6 +162,10 @@ class FeedingFragment : Fragment() {
             binding.timerStart.visibility = View.VISIBLE
             binding.submit.visibility = View.GONE
             binding.edit.visibility = View.GONE
+            viewModel._isLeftSelected.value = false
+            viewModel._isRightSelected.value = true
+            viewModel._isFormulaSelected.value = false
+            viewModel._isMealSelected.value = false
         }
         binding.formula.setOnClickListener {
             isChoosed = true
@@ -127,6 +174,10 @@ class FeedingFragment : Fragment() {
             binding.submit.visibility = View.VISIBLE
             binding.edit.visibility = View.VISIBLE
             binding.timer.text = viewModel.getTime()
+            viewModel._isLeftSelected.value = false
+            viewModel._isRightSelected.value = false
+            viewModel._isFormulaSelected.value = true
+            viewModel._isMealSelected.value = false
         }
         binding.meal.setOnClickListener {
             isChoosed = true
@@ -135,6 +186,10 @@ class FeedingFragment : Fragment() {
             binding.submit.visibility = View.VISIBLE
             binding.edit.visibility = View.VISIBLE
             binding.timer.text = viewModel.getTime()
+            viewModel._isLeftSelected.value = false
+            viewModel._isRightSelected.value = false
+            viewModel._isFormulaSelected.value = false
+            viewModel._isMealSelected.value = true
         }
     }
 
@@ -150,5 +205,13 @@ class FeedingFragment : Fragment() {
         binding.right.isClickable = true
         binding.formula.isClickable = true
         binding.meal.isClickable = true
+    }
+
+    private fun scaleView(view: View){
+        view.animate().scaleX(1.1F).scaleY(1.1F)
+    }
+
+    private fun unscaleView(view: View){
+        view.animate().scaleX(1F).scaleY(1F)
     }
 }

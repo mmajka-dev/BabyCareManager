@@ -129,7 +129,8 @@ class SettingsFragment : Fragment() {
     }
 
     fun selectImageInAlbum() {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        intent.setType("image/*")
         startActivityForResult(intent, 1)
     }
 }
