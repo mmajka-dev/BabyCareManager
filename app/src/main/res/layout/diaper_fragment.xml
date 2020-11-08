@@ -125,7 +125,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="25dp"
                 android:background="@drawable/ic_check"
-                app:backgroundTint="@color/colorYellow" />
+                app:backgroundTint="@color/colorYellow"
+                android:foreground="@drawable/ripple"/>
 
         <ImageButton
             android:id="@+id/edit"
@@ -134,6 +135,7 @@
             android:layout_marginStart="3dp"
             android:layout_toEndOf="@id/time"
             android:backgroundTint="@color/colorTransparent"
+            android:foreground="@drawable/ripple"
             app:srcCompat="@drawable/ic_edit"
             android:layout_below="@+id/buttons"
             android:layout_marginTop="40dp"

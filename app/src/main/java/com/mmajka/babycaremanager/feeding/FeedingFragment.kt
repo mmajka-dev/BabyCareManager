@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.mmajka.babycaremanager.MainActivity
 import com.mmajka.babycaremanager.R
 import com.mmajka.babycaremanager.databinding.FeedingFragmentBinding
 import kotlinx.android.synthetic.main.action_fragment.*
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.feeding_fragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.lang.NullPointerException
 
 
 class FeedingFragment : Fragment() {
@@ -29,6 +31,12 @@ class FeedingFragment : Fragment() {
     private lateinit var binding: FeedingFragmentBinding
     private lateinit var viewModel: FeedingViewModel
     private var isChoosed = false
+    private lateinit var id: String
+    private lateinit var title: String
+    private lateinit var info: String
+    private lateinit var date: String
+    private lateinit var time: String
+    private lateinit var duration: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +45,53 @@ class FeedingFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.feeding_fragment, container, false)
         binding.timerStart.isClickable = false
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val bundle = arguments
+        if (bundle != null){
+            id = bundle.getString("id")!!
+            title = bundle.getString("title")!!
+            info = bundle.getString("info")!!
+            date = bundle.getString("date")!!
+            time = bundle.getString("time")!!
+            duration = bundle.getString("duration")!!
+
+            try {
+
+                if (info.startsWith("Left")){
+                    Log.i("Info: ","$info")
+                    viewModel._isLeftSelected.value = true
+                    viewModel._isRightSelected.value = false
+                    viewModel._isFormulaSelected.value = false
+                    viewModel._isMealSelected.value = false
+                    binding.timer.text = duration
+                }else if (info.startsWith(" Right")){
+                    viewModel._isLeftSelected.value = false
+                    viewModel._isRightSelected.value = true
+                    viewModel._isFormulaSelected.value = false
+                    viewModel._isMealSelected.value = false
+                    binding.timer.text = duration
+                }else if (info.startsWith("Formula")){
+                    viewModel._isLeftSelected.value = false
+                    viewModel._isRightSelected.value = false
+                    viewModel._isFormulaSelected.value = true
+                    viewModel._isMealSelected.value = false
+                    binding.timer.text = time
+                }else if (info.startsWith("Meal")){
+                    viewModel._isLeftSelected.value = false
+                    viewModel._isRightSelected.value = false
+                    viewModel._isFormulaSelected.value = false
+                    viewModel._isMealSelected.value = true
+                    binding.timer.text = time
+                }
+            }catch (e: NullPointerException){
+                Log.e("Bundle error: ","${e.message}")
+            }
+            binding.comment.setText(info)
+            binding.acTitle.text = info
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

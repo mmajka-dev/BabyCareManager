@@ -1,6 +1,7 @@
 package com.mmajka.babycaremanager.actions
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.mmajka.babycaremanager.MainActivity.Companion.CURRENT_ACTIVITY
 import com.mmajka.babycaremanager.R
 import com.mmajka.babycaremanager.databinding.ActionFragmentBinding
+import java.lang.NullPointerException
 
 class ActionFragment : Fragment() {
 
@@ -51,6 +53,12 @@ class ActionFragment : Fragment() {
         if (bundle != null){
             id = bundle.getString("id")!!
             title = bundle.getString("title")!!
+            try {
+                CURRENT_ACTIVITY = title
+                setupView(binding.appBar, binding.title, binding.submit, binding.time, binding.edit)
+            }catch (e: NullPointerException){
+                Log.e("Bundle error", "${e.message}")
+            }
             info = bundle.getString("info")!!
             date = bundle.getString("date")!!
             time = bundle.getString("time")!!
@@ -59,6 +67,8 @@ class ActionFragment : Fragment() {
             binding.time.text = time
             binding.comment.setText(info)
         }
+
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

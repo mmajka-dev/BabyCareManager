@@ -30,41 +30,6 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     val ref = db.getReference(path!!).child("child")
     val refActions = db.getReference(path!!).child("actions")
 
-    var _child = MutableLiveData<child>()
-    val child: LiveData<child>
-        get() = _child
-
-    var _hasChanged = MutableLiveData<Boolean>()
-    val hasChanged: LiveData<Boolean>
-        get() = _hasChanged
-
-
-    fun onDataChanged(n2: EditText, b2: TextView, bt: ImageView){
-        n2.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                bt.visibility = View.VISIBLE
-            }
-        })
-
-        b2.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                bt.visibility = View.VISIBLE
-            }
-        })
-    }
-
     fun putChildInfo(n: String, b: String){
         val child = child(n,b)
         ref.setValue(child)

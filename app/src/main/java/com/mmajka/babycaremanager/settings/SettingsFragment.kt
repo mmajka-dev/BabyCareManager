@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.mmajka.babycaremanager.R
+import com.mmajka.babycaremanager.data.child
 import com.mmajka.babycaremanager.databinding.SettingsFragmentBinding
 import com.mmajka.babycaremanager.invite.InviteFragment
 import com.mmajka.babycaremanager.utils.Utils
@@ -34,7 +35,6 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.settings_fragment, container, false)
-
         return binding.root
     }
 
@@ -53,40 +53,9 @@ class SettingsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val container = R.id.fragment_container
-        val n = binding.name.text.toString()
-        val b = binding.birthday.text.toString()
 
         viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
         viewModel.getChild(name, birthday)
-
-        name.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                save.visibility = View.GONE
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                save.visibility = View.VISIBLE
-            }
-        })
-
-        birthday.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                save.visibility = View.GONE
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                save.visibility = View.VISIBLE
-            }
-        })
-
-        viewModel.onDataChanged(name, birthday, save)
-
         Glide.with(this).load(viewModel.getPhotoPath()).error(R.drawable.ic_boy).into(imageView4)
 
         binding.inviteTxt.setOnClickListener {

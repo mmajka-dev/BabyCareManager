@@ -51,7 +51,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:visibility="gone"/>
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.MaterialToolbar>
@@ -102,6 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="01.07.2020"
+                android:foreground="@drawable/ripple"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.448"
                 app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +121,7 @@
                 android:paddingBottom="5dp"
                 android:text="Maksymilian"
                 android:textAlignment="textStart"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorHint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.469"
                 app:layout_constraintStart_toStartOf="parent"
@@ -134,7 +135,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="30dp"
                 android:text="Birthday:"
-
+                android:textColor="@color/colorHint"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -194,7 +195,8 @@
                 android:layout_marginStart="34dp"
                 android:layout_marginTop="31dp"
                 android:layout_toEndOf="@id/clear"
-                android:text="Clear database" />
+                android:text="Clear database"
+                android:foreground="@drawable/ripple"/>
 
             <ImageView
                 android:id="@+id/invite"
@@ -216,7 +218,31 @@
                 android:layout_marginTop="27dp"
                 android:layout_toEndOf="@id/invite"
                 android:text="Invite partner"
-                android:foreground="@drawable/ripple"/>
+                android:foreground="@drawable/ripple"
+                />
+            <ImageView
+                android:id="@+id/enter_code"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_feet"
+                android:layout_below="@id/invite"/>
+
+            <TextView
+                android:id="@+id/code_txt"
+                style="@style/SettingsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/invite_txt"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="27dp"
+                android:layout_toEndOf="@id/invite"
+                android:text="Enter code"
+                android:foreground="@drawable/ripple"
+                />
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

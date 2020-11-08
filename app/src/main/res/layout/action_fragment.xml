@@ -77,6 +77,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="25dp"
+            android:foreground="@drawable/ripple"
             android:background="@drawable/ic_check" />
 
         <ImageButton
@@ -88,6 +89,7 @@
             android:layout_marginStart="3dp"
             app:tint="@color/colorYellow"
             android:backgroundTint="@color/colorTransparent"
+            android:foreground="@drawable/ripple"
             android:layout_below="@id/app_bar"
             android:layout_toEndOf="@id/time"/>
 
