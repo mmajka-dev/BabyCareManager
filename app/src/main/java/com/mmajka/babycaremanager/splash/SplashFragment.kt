@@ -1,6 +1,7 @@
 package com.mmajka.babycaremanager.splash
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,17 +9,26 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.mmajka.babycaremanager.R
 import com.mmajka.babycaremanager.databinding.SplashFragmentBinding
 import com.mmajka.babycaremanager.home.HomeFragment
 import com.mmajka.babycaremanager.utils.Utils
 import com.mmajka.babycaremanager.welcome.WelcomeFragment
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-class SplashFragment : Fragment() {
+
+class SplashFragment : Fragment(), CoroutineScope {
 
     private lateinit var viewModel: SplashViewModel
     private lateinit var  bind: SplashFragmentBinding
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + Job()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,13 +42,24 @@ class SplashFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(SplashViewModel::class.java)
         val check = onUserCheck()
-        Log.i("CHECK2", "$check")
+
+        val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        launch {
+            delay(1000)
             if (check){
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).disallowAddToBackStack().commit()
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+                fragmentTransaction.replace(R.id.fragment_container, HomeFragment(), "h")
+                fragmentTransaction.disallowAddToBackStack()
+                fragmentTransaction.commit()
             }else{
                 newID()
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WelcomeFragment()).disallowAddToBackStack().commit()
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+                fragmentTransaction.replace(R.id.fragment_container, WelcomeFragment(), "h")
+                fragmentTransaction.disallowAddToBackStack()
+                fragmentTransaction.commit()
             }
+        }
     }
 
     private fun onUserCheck(): Boolean{
@@ -54,4 +75,6 @@ class SplashFragment : Fragment() {
         Log.i("ID", "$id")
         Toast.makeText(context, "$id", Toast.LENGTH_SHORT).show()
     }
+
+
 }

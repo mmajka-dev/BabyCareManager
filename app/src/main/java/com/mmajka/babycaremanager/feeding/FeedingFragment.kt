@@ -1,11 +1,13 @@
 package com.mmajka.babycaremanager.feeding
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -27,7 +29,7 @@ class FeedingFragment : Fragment() {
     timer się ukrywa a pokazuje edit text z dopiskiem ml. Jeśli wybór pada na posiłek to oba są ukryte i zostaje
     tylko check oraz comment ET
      */
-
+    //TODO funkcja aktualizacji rekordu
     private lateinit var binding: FeedingFragmentBinding
     private lateinit var viewModel: FeedingViewModel
     private var isChoosed = false
@@ -57,34 +59,39 @@ class FeedingFragment : Fragment() {
             date = bundle.getString("date")!!
             time = bundle.getString("time")!!
             duration = bundle.getString("duration")!!
-
+            lockButtons()
             try {
-
                 if (info.startsWith("Left")){
                     Log.i("Info: ","$info")
                     viewModel._isLeftSelected.value = true
                     viewModel._isRightSelected.value = false
                     viewModel._isFormulaSelected.value = false
                     viewModel._isMealSelected.value = false
-                    binding.timer.text = duration
+                    viewModel._time.value = duration
+                    binding.timerStart.visibility = View.GONE
+                    binding.submit.visibility = View.VISIBLE
                 }else if (info.startsWith(" Right")){
                     viewModel._isLeftSelected.value = false
                     viewModel._isRightSelected.value = true
                     viewModel._isFormulaSelected.value = false
                     viewModel._isMealSelected.value = false
-                    binding.timer.text = duration
+                    viewModel._time.value = duration
+                    binding.timerStart.visibility = View.GONE
+                    binding.submit.visibility = View.VISIBLE
                 }else if (info.startsWith("Formula")){
                     viewModel._isLeftSelected.value = false
                     viewModel._isRightSelected.value = false
                     viewModel._isFormulaSelected.value = true
                     viewModel._isMealSelected.value = false
-                    binding.timer.text = time
+                    viewModel._time.value = time
                 }else if (info.startsWith("Meal")){
                     viewModel._isLeftSelected.value = false
                     viewModel._isRightSelected.value = false
                     viewModel._isFormulaSelected.value = false
                     viewModel._isMealSelected.value = true
-                    binding.timer.text = time
+                    viewModel._time.value = time
+                }else{
+                    viewModel._time.value = "00:00"
                 }
             }catch (e: NullPointerException){
                 Log.e("Bundle error: ","${e.message}")
@@ -96,6 +103,7 @@ class FeedingFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         viewModel = ViewModelProvider(this).get(FeedingViewModel::class.java)
         if (!isChoosed) binding.timerStart.isClickable = false
         viewModel._isLeftSelected.value = true
@@ -103,15 +111,15 @@ class FeedingFragment : Fragment() {
         viewModel._isFormulaSelected.value = false
         viewModel._isMealSelected.value = false
         onButtonsClick()
-
+        viewModel._time.value = "00:00"
         viewModel._time.observe(viewLifecycleOwner, Observer { newTime ->
-            binding.timer.setText(newTime)
+            binding.timer.text = newTime
         })
 
         viewModel._isLeftSelected.observe(viewLifecycleOwner, Observer { isSelected ->
             if (isSelected){
                 scaleView(left)
-                timer.text = "00:00"
+               timer.text = viewModel.time.value
             }else{
                 unscaleView(left)
             }
@@ -120,7 +128,7 @@ class FeedingFragment : Fragment() {
         viewModel._isRightSelected.observe(viewLifecycleOwner, Observer { isSelected ->
             if (isSelected){
                 scaleView(right)
-                timer.text = "00:00"
+                timer.text = viewModel.time.value
             }else{
                 unscaleView(right)
             }
@@ -263,7 +271,7 @@ class FeedingFragment : Fragment() {
     }
 
     private fun scaleView(view: View){
-        view.animate().scaleX(1.1F).scaleY(1.1F)
+        view.animate().scaleX(1.15F).scaleY(1.15F)
     }
 
     private fun unscaleView(view: View){

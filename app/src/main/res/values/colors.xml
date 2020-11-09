@@ -2,10 +2,10 @@
 <resources>
     <color name="colorPrimary">#4DBFB4</color>
     <color name="colorPrimaryPressed">#2C6A64</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimaryDark">#4DBFB4</color>
     <color name="colorAccent">#03DAC5</color>
 
-    <color name="colorHint">#AEACAC</color>
+    <color name="colorHint">#9E9E9E</color>
     <color name="colorText">#605F5F</color>
 
     <color name="colorTransparent">#00FFFFFF</color>
@@ -16,4 +16,8 @@
     <color name="colorYellow">#F2C06C</color>
     <color name="colorPurple">#CAA4CC</color>
     <color name="colorBlue">#62BCD4</color>
+
+    <color name="colorRedSelect">#CDFA8997</color>
+    <color name="colorGreenSelect">#CD6DB67F</color>
+    <color name="colorYellowSelect">#CCF2C06C</color>
 </resources>

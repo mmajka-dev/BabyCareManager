@@ -39,7 +39,6 @@ class ActionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.action_fragment, container, false)
-        Toast.makeText(context, "$CURRENT_ACTIVITY", Toast.LENGTH_SHORT).show()
         setupView(binding.appBar, binding.title, binding.submit, binding.time, binding.edit)
         binding.toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()

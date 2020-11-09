@@ -1,11 +1,14 @@
 package com.mmajka.babycaremanager.welcome
 
+import android.app.ActionBar
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.transition.Slide
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,17 +64,12 @@ class WelcomeFragment : Fragment() {
         }
 
         binding.codeCard.setOnClickListener {
-
             when(visible){
                 true -> {
-                    visible = false
-                    binding.code.visibility = View.GONE
-                    binding.okCode.visibility = View.GONE
+                    hideCodeCard()
                 }
                 false ->{
-                    visible = true
-                    binding.code.visibility = View.VISIBLE
-                    binding.okCode.visibility = View.VISIBLE
+                    showCodeCard()
                 }
             }
         }
@@ -138,22 +136,25 @@ class WelcomeFragment : Fragment() {
             )
         }
     }
-
-    fun getRealPathFromURI(uri: Uri?): String? {
-        if (uri == null) {
-            return null
-        }
-        val projection = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor: Cursor? = activity!!.contentResolver.query(uri, projection, null, null, null)
-        if (cursor != null) {
-            val column_index: Int = cursor
-                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-            cursor.moveToFirst()
-            return cursor.getString(column_index)
-        }
-        return uri.path
+    private fun showCodeCard(){
+        visible = true
+        binding.code.visibility = View.VISIBLE
+        binding.okCode.visibility = View.VISIBLE
+        binding.bgView.visibility = View.VISIBLE
+        binding.photo.isEnabled = false
+        binding.babyName.isEnabled = false
+        binding.birthday.isEnabled = false
+        binding.done.isEnabled = false
     }
 
-    
-
+    private fun hideCodeCard(){
+        visible = false
+        binding.code.visibility = View.GONE
+        binding.okCode.visibility = View.GONE
+        binding.bgView.visibility = View.GONE
+        binding.photo.isEnabled = true
+        binding.babyName.isEnabled = true
+        binding.birthday.isEnabled = true
+        binding.done.isEnabled = true
+    }
 }

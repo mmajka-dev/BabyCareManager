@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,6 +48,9 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val container = R.id.fragment_container
+        val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         viewModel.getChild(binding.babyName, binding.age)
         Glide.with(this).load(viewModel.getPhotoPath()).error(R.drawable.ic_boy).into(photo)
@@ -53,65 +58,61 @@ class HomeFragment : Fragment() {
         setupActivitiesRecycler()
         setupTodayRecycler()
 
+
         binding.inventoryRv.diaper.setOnClickListener {
             CURRENT_ACTIVITY = "Diaper"
-            Toast.makeText(context, "$CURRENT_ACTIVITY", Toast.LENGTH_SHORT).show()
-            requireActivity().supportFragmentManager.beginTransaction().replace(
-                container,
-                DiaperFragment()
-            ).addToBackStack("").commit()
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+            fragmentTransaction.replace(R.id.fragment_container, DiaperFragment(), "h")
+            fragmentTransaction.addToBackStack("")
+            fragmentTransaction.commit()
         }
         binding.inventoryRv.bath.setOnClickListener{
             CURRENT_ACTIVITY = "Bath"
-            Toast.makeText(context, "$CURRENT_ACTIVITY", Toast.LENGTH_SHORT).show()
-            requireActivity().supportFragmentManager.beginTransaction().replace(
-                container,
-                ActionFragment()
-            ).addToBackStack("").commit()
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+            fragmentTransaction.replace(R.id.fragment_container, ActionFragment(), "h")
+            fragmentTransaction.addToBackStack("")
+            fragmentTransaction.commit()
         }
         binding.inventoryRv.feeding.setOnClickListener{
             CURRENT_ACTIVITY = "Feeding"
-            Toast.makeText(context, "$CURRENT_ACTIVITY", Toast.LENGTH_SHORT).show()
-            requireActivity().supportFragmentManager.beginTransaction().replace(
-                container,
-                FeedingFragment()
-            ).addToBackStack("").commit()
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+            fragmentTransaction.replace(R.id.fragment_container, FeedingFragment(), "h")
+            fragmentTransaction.addToBackStack("")
+            fragmentTransaction.commit()
         }
         binding.inventoryRv.sleep.setOnClickListener{
             CURRENT_ACTIVITY = "Sleep"
-            Toast.makeText(context, "$CURRENT_ACTIVITY", Toast.LENGTH_SHORT).show()
-            requireActivity().supportFragmentManager.beginTransaction().replace(
-                container,
-                ActionFragment()
-            ).addToBackStack("").commit()
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+            fragmentTransaction.replace(R.id.fragment_container, ActionFragment(), "h")
+            fragmentTransaction.addToBackStack("")
+            fragmentTransaction.commit()
         }
         binding.inventoryRv.walk.setOnClickListener{
             CURRENT_ACTIVITY = "Walk"
-            Toast.makeText(context, "$CURRENT_ACTIVITY", Toast.LENGTH_SHORT).show()
-            requireActivity().supportFragmentManager.beginTransaction().replace(
-                container,
-                ActionFragment()
-            ).addToBackStack("").commit()
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+            fragmentTransaction.replace(R.id.fragment_container, ActionFragment(), "h")
+            fragmentTransaction.addToBackStack("")
+            fragmentTransaction.commit()
         }
 
         binding.tdFullscreen.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(
-                container,
-                AllTodayFragment()
-            ).addToBackStack("").commit()
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+            fragmentTransaction.replace(R.id.fragment_container, AllTodayFragment(), "h")
+            fragmentTransaction.addToBackStack("")
+            fragmentTransaction.commit()
         }
         binding.acFullscreen.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(
-                container,
-                AllActions()
-            ).addToBackStack("").commit()
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+            fragmentTransaction.replace(R.id.fragment_container, AllActions(), "h")
+            fragmentTransaction.addToBackStack("")
+            fragmentTransaction.commit()
         }
 
         binding.invite.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(
-                container,
-                SettingsFragment()
-            ).addToBackStack("").commit()
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+            fragmentTransaction.replace(R.id.fragment_container, SettingsFragment(), "h")
+            fragmentTransaction.addToBackStack("")
+            fragmentTransaction.commit()
         }
     }
 

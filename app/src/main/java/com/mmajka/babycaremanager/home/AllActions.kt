@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +20,7 @@ import com.mmajka.babycaremanager.data.BasicActionEntity
 import com.mmajka.babycaremanager.databinding.AllActionsFragmentBinding
 import com.mmajka.babycaremanager.diaper.DiaperFragment
 import com.mmajka.babycaremanager.feeding.FeedingFragment
+import com.mmajka.babycaremanager.invite.InviteFragment
 import com.mmajka.babycaremanager.utils.onClickListener
 import kotlinx.android.synthetic.main.all_today_fragment.*
 
@@ -37,6 +40,8 @@ class AllActions : Fragment(), onClickListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(AllActionsViewModel::class.java)
+
+
         binding.toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
         }
@@ -68,6 +73,8 @@ class AllActions : Fragment(), onClickListener {
         val diaper = DiaperFragment()
         val feeding = FeedingFragment()
         val another = ActionFragment()
+        val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
 
         bundle.putString("id", action.id)
         bundle.putString("title", action.title)
@@ -79,26 +86,38 @@ class AllActions : Fragment(), onClickListener {
         when(action.title){
             "Diaper" ->{
                 diaper.arguments = bundle
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, diaper).addToBackStack("").commit()
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+                fragmentTransaction.replace(R.id.fragment_container, diaper, "h")
+                fragmentTransaction.addToBackStack("")
+                fragmentTransaction.commit()
             }
             "Feeding" ->{
                 feeding.arguments = bundle
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, feeding).addToBackStack("").commit()
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+                fragmentTransaction.replace(R.id.fragment_container, feeding, "h")
+                fragmentTransaction.addToBackStack("")
+                fragmentTransaction.commit()
             }
             "Bath" -> {
                 CURRENT_ACTIVITY = "Bath"
                 another.arguments = bundle
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, another).addToBackStack("").commit()
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+                fragmentTransaction.replace(R.id.fragment_container, another, "h")
+                fragmentTransaction.addToBackStack("")
+                fragmentTransaction.commit()
             }
             "Walk" ->{
                 CURRENT_ACTIVITY = "Walk"
                 another.arguments = bundle
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, another).addToBackStack("").commit()
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+                fragmentTransaction.replace(R.id.fragment_container, another, "h")
+                fragmentTransaction.addToBackStack("")
+                fragmentTransaction.commit()
             }
             "Sleep" ->{
                 CURRENT_ACTIVITY = "Sleep"
                 another.arguments = bundle
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, another).addToBackStack("").commit()
+                another
             }
         }
 

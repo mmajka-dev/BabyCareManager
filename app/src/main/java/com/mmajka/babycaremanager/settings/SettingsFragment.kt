@@ -12,11 +12,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.mmajka.babycaremanager.R
+import com.mmajka.babycaremanager.actions.ActionFragment
 import com.mmajka.babycaremanager.data.child
 import com.mmajka.babycaremanager.databinding.SettingsFragmentBinding
 import com.mmajka.babycaremanager.invite.InviteFragment
@@ -30,11 +33,14 @@ class SettingsFragment : Fragment() {
 
     private lateinit var viewModel: SettingsViewModel
     private lateinit var binding: SettingsFragmentBinding
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.settings_fragment, container, false)
+
         return binding.root
     }
 
@@ -53,16 +59,17 @@ class SettingsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val container = R.id.fragment_container
-
+        val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
         viewModel.getChild(name, birthday)
         Glide.with(this).load(viewModel.getPhotoPath()).error(R.drawable.ic_boy).into(imageView4)
 
         binding.inviteTxt.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(
-                container,
-                InviteFragment()
-            ).addToBackStack("").commit()
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+            fragmentTransaction.replace(R.id.fragment_container, InviteFragment(), "h")
+            fragmentTransaction.addToBackStack("")
+            fragmentTransaction.commit()
         }
 
         binding.clearTxt.setOnClickListener {
@@ -85,7 +92,7 @@ class SettingsFragment : Fragment() {
             val n1 = binding.name.text.toString()
             val b1 = binding.birthday.text.toString()
             viewModel.putChildInfo(n1, b1)
-            Snackbar.make(binding.root, "Changes saved", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, "Changes saved", Snackbar.LENGTH_SHORT).setBackgroundTint(resources.getColor(R.color.colorPrimary)).show()
         }
 
         binding.imageView4.setOnClickListener {
@@ -95,11 +102,45 @@ class SettingsFragment : Fragment() {
         binding.toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
         }
+
+        binding.codeTxt.setOnClickListener {
+            showCodeCard()
+        }
+        binding.okCode.setOnClickListener {
+            setChildInfo()
+        }
+        binding.cancel.setOnClickListener {
+            hideCodeCard()
+        }
     }
 
     fun selectImageInAlbum() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
         intent.setType("image/*")
         startActivityForResult(intent, 1)
+    }
+
+    fun showCodeCard(){
+        binding.bgView.visibility = View.VISIBLE
+        binding.codeCard.visibility = View.VISIBLE
+        binding.name.isEnabled = false
+        binding.birthday.isEnabled = false
+        binding.clearTxt.isEnabled = false
+        binding.inviteTxt.isEnabled = false
+    }
+
+    fun hideCodeCard(){
+        binding.bgView.visibility = View.GONE
+        binding.codeCard.visibility = View.GONE
+        binding.name.isEnabled = true
+        binding.birthday.isEnabled = true
+        binding.clearTxt.isEnabled = true
+        binding.inviteTxt.isEnabled = true
+    }
+
+    private fun setChildInfo(){
+        val name = binding.name.text.toString()
+        val birthday = binding.birthday.text.toString()
+        viewModel.putChildInfo(name, birthday)
     }
 }
