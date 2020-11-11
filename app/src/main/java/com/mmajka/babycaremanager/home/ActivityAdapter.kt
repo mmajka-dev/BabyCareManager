@@ -1,12 +1,12 @@
 package com.mmajka.babycaremanager.home
 
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mmajka.babycaremanager.R
 import com.mmajka.babycaremanager.data.BasicActionEntity
-import com.mmajka.babycaremanager.utils.onClickListener
 import kotlinx.android.synthetic.main.single_activity.view.*
 
 class ActivityAdapter(val actions: ArrayList<BasicActionEntity>): RecyclerView.Adapter<ActivityViewHolder>() {
@@ -20,6 +20,8 @@ class ActivityAdapter(val actions: ArrayList<BasicActionEntity>): RecyclerView.A
         val bind = actions.get(position)
         val image = holder.image
         holder.bind(bind)
+
+        //TODO do poprawy na subtype
         when(actions.get(position).title){
             "Diaper" -> {
                 image.setImageResource(R.drawable.ic_diaper_rv)

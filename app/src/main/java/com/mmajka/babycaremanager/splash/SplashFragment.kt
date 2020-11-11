@@ -45,8 +45,14 @@ class SplashFragment : Fragment(), CoroutineScope {
 
         val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+
+        runBlocking {
+
+        }
         launch {
+            loadDatabase().await()
             delay(1000)
+            trimDatabase()
             if (check){
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
                 fragmentTransaction.replace(R.id.fragment_container, HomeFragment(), "h")
@@ -74,6 +80,14 @@ class SplashFragment : Fragment(), CoroutineScope {
         viewModel.putID(id)
         Log.i("ID", "$id")
         Toast.makeText(context, "$id", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun loadDatabase() = CoroutineScope(Dispatchers.IO).async{
+        viewModel.loadDatabase()
+    }
+
+    private fun trimDatabase(){
+        viewModel.trimDatabase()
     }
 
 

@@ -27,7 +27,6 @@ class ActionViewModel(application: Application) : AndroidViewModel(application) 
         }else{
             "$hour:$minute"
         }
-        Log.i("TIME", "$time")
         return time
     }
 

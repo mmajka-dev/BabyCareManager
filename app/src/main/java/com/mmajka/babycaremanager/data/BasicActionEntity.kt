@@ -6,3 +6,4 @@ class BasicActionEntity (var id: String ="",
                          var time: String = "",
                          var info: String = "",
                          var duration: String = "")
+                         //var subtype: String ="")

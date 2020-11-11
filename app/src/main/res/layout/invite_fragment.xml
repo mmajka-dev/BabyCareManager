@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Invite partner to \n Baby Care!"/>
+        android:text="@string/invite_partner_to_n_baby_care"/>
 
     <ImageView
         android:id="@+id/imageView6"
@@ -63,7 +63,7 @@
         android:id="@+id/code_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your invite code:"
+        android:text="@string/your_invite_code"
         android:layout_below="@id/imageView6"
         android:layout_centerHorizontal="true"/>
 
@@ -72,7 +72,7 @@
         android:id="@+id/code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00000000000"
+        android:text="@string/code"
         android:layout_below="@id/code_title"
         android:layout_centerHorizontal="true"/>
 
@@ -81,7 +81,7 @@
         style="@style/ExtendedFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share"
+        android:text="@string/share"
         app:icon="@drawable/ic_share"
         android:layout_below="@+id/code"
         android:layout_centerHorizontal="true"

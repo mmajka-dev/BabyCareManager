@@ -1,6 +1,7 @@
 package com.mmajka.babycaremanager.diaper
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import com.mmajka.babycaremanager.MainActivity
 import com.mmajka.babycaremanager.R
 import com.mmajka.babycaremanager.databinding.DiaperFragmentBinding
 import kotlinx.android.synthetic.main.diaper_fragment.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 class DiaperFragment : Fragment() {
 
@@ -49,7 +52,7 @@ class DiaperFragment : Fragment() {
         viewModel._isPeeSelected.observe(viewLifecycleOwner, Observer {isSelected ->
             if (isSelected){
                 scaleView(pee)
-                addInfo = "Pee"
+                addInfo = getString(R.string.pee)
             }else{
                 unscaleView(pee)
             }
@@ -58,7 +61,7 @@ class DiaperFragment : Fragment() {
         viewModel._isPooSelected.observe(viewLifecycleOwner, Observer {isSelected ->
             if (isSelected){
                 scaleView(poo)
-                addInfo = "Poo"
+                addInfo = getString(R.string.poo)
             }else{
                 unscaleView(poo)
                 comment.setText("")
@@ -82,7 +85,7 @@ class DiaperFragment : Fragment() {
 
         binding.submit.setOnClickListener {
             val date = viewModel.getDate()
-            val title = MainActivity.CURRENT_ACTIVITY
+            val title = binding.babyName.text.toString()
             val time = binding.time.text.toString()
             val info = "$addInfo ${binding.comment.text}"
             viewModel.setActions(date, time, title, info, "")

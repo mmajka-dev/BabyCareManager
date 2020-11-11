@@ -29,7 +29,7 @@
                     android:id="@+id/baby_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="All Actions"
+                    android:text="@string/title_all_actions"
                     android:textColor="@color/colorWhite"
                     android:textSize="25sp"
                     app:layout_constraintBottom_toBottomOf="parent"

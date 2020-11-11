@@ -31,7 +31,7 @@
                     android:id="@+id/baby_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Settings"
+                    android:text="@string/title_settings"
                     android:textColor="@color/colorWhite"
                     android:textSize="25sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
-                android:text="Name:"
+                android:text="@string/name"
                 android:textSize="20sp"
                 android:layout_below="@+id/imageView4"
                 />
@@ -101,10 +101,10 @@
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="14dp"
                 android:layout_toEndOf="@+id/textView4"
-                android:drawableEnd="@drawable/ic_calendar_settings"
                 android:drawablePadding="18dp"
                 android:foreground="@drawable/ripple"
-                android:text="01.07.2020" />
+                android:text="@string/Date"
+                app:drawableEndCompat="@drawable/ic_calendar_settings" />
 
             <EditText
                 android:id="@+id/name"
@@ -116,7 +116,7 @@
                 android:layout_marginTop="21dp"
                 android:layout_toEndOf="@+id/textView3"
                 android:background="@null"
-                android:text="Maksymilian"
+                android:text="@string/edit_name"
                 android:drawableEnd="@drawable/ic_edit_settings"
                 android:drawablePadding="18dp"
                 android:textAlignment="viewStart"
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="14dp"
-                android:text="Birthday:"
+                android:text="@string/birthday"
                 android:textColor="@color/colorHint"
                 android:layout_below="@id/textView3" />
 
@@ -167,7 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Application"
+                android:text="@string/card_application"
                 android:layout_centerHorizontal="true" />
 
             <ImageView
@@ -189,7 +189,7 @@
                 android:layout_marginStart="34dp"
                 android:layout_marginTop="31dp"
                 android:layout_toEndOf="@id/clear"
-                android:text="Clear database"
+                android:text="@string/clear_database"
                 android:foreground="@drawable/ripple"/>
 
             <ImageView
@@ -211,7 +211,7 @@
                 android:layout_marginStart="34dp"
                 android:layout_marginTop="27dp"
                 android:layout_toEndOf="@id/invite"
-                android:text="Invite partner"
+                android:text="@string/invite_partner"
                 android:foreground="@drawable/ripple"
                 />
             <ImageView
@@ -233,7 +233,7 @@
                 android:layout_marginStart="34dp"
                 android:layout_marginTop="27dp"
                 android:layout_toEndOf="@id/invite"
-                android:text="Enter code"
+                android:text="@string/enter_code"
                 android:foreground="@drawable/ripple"
                 />
 
@@ -276,7 +276,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:animateLayoutChanges="true"
-                android:text="I have an invite code" />
+                android:text="@string/i_have_an_invite_code" />
 
             <EditText
                 android:id="@+id/code"
@@ -298,7 +298,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:animateLayoutChanges="true"
-                android:text="OK"
+                android:text="@string/ok"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 app:elevation="0dp"
@@ -314,7 +314,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
                 android:animateLayoutChanges="true"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:textColor="@color/colorPrimary"
                 android:foreground="@drawable/ripple"
                 app:elevation="0dp"

@@ -43,7 +43,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="69dp"
             android:gravity="center_vertical"
-            android:hint="Name"
+            android:hint="@string/name1"
             android:inputType="textPersonName" />
 
         <TextView
@@ -53,10 +53,9 @@
             android:layout_centerHorizontal="true"
             android:foreground="@drawable/ripple"
             android:gravity="center_vertical"
-            android:hint="Birthday"
-            android:drawableEnd="@drawable/ic_calendar"
+            android:hint="@string/birthday1"
             android:paddingEnd="10dp"
-            />
+            app:drawableEndCompat="@drawable/ic_calendar" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/done"
@@ -64,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="25dp"
-            android:text="DONE"
+            android:text="@string/done"
             android:gravity="center_vertical"
             android:layout_below="@id/birthday"
             android:layout_centerHorizontal="true"
@@ -98,7 +97,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:animateLayoutChanges="true"
-                android:text="I have an invite code" />
+                android:text="@string/i_have_an_invite_code" />
 
             <EditText
                 android:id="@+id/code"
@@ -106,7 +105,7 @@
                 android:layout_below="@id/card_title"
                 android:layout_centerHorizontal="true"
                 android:animateLayoutChanges="true"
-                android:hint="Name"
+                android:hint="@string/name1"
                 android:inputType="textPersonName"
                 android:visibility="gone" />
 
@@ -120,7 +119,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
                 android:animateLayoutChanges="true"
-                android:text="OK"
+                android:text="@string/ok"
                 android:visibility="gone"
                 app:elevation="0dp"
                 app:icon="@drawable/ic_check" />

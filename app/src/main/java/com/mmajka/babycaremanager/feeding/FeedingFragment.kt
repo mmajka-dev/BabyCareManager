@@ -1,21 +1,17 @@
 package com.mmajka.babycaremanager.feeding
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.mmajka.babycaremanager.MainActivity
 import com.mmajka.babycaremanager.R
 import com.mmajka.babycaremanager.databinding.FeedingFragmentBinding
-import kotlinx.android.synthetic.main.action_fragment.*
 import kotlinx.android.synthetic.main.feeding_fragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -60,8 +56,9 @@ class FeedingFragment : Fragment() {
             time = bundle.getString("time")!!
             duration = bundle.getString("duration")!!
             lockButtons()
+            //TODO do przerobienia na subtype
             try {
-                if (info.startsWith("Left")){
+                if (info.startsWith("Left") || info.startsWith("Lewa")){
                     Log.i("Info: ","$info")
                     viewModel._isLeftSelected.value = true
                     viewModel._isRightSelected.value = false
@@ -70,7 +67,7 @@ class FeedingFragment : Fragment() {
                     viewModel._time.value = duration
                     binding.timerStart.visibility = View.GONE
                     binding.submit.visibility = View.VISIBLE
-                }else if (info.startsWith(" Right")){
+                }else if (info.startsWith(" Right") || info.startsWith("Prawa")){
                     viewModel._isLeftSelected.value = false
                     viewModel._isRightSelected.value = true
                     viewModel._isFormulaSelected.value = false
@@ -78,13 +75,13 @@ class FeedingFragment : Fragment() {
                     viewModel._time.value = duration
                     binding.timerStart.visibility = View.GONE
                     binding.submit.visibility = View.VISIBLE
-                }else if (info.startsWith("Formula")){
+                }else if (info.startsWith("Formula") || info.startsWith("Mleko")){
                     viewModel._isLeftSelected.value = false
                     viewModel._isRightSelected.value = false
                     viewModel._isFormulaSelected.value = true
                     viewModel._isMealSelected.value = false
                     viewModel._time.value = time
-                }else if (info.startsWith("Meal")){
+                }else if (info.startsWith("Meal") || info.startsWith("Posiłek")){
                     viewModel._isLeftSelected.value = false
                     viewModel._isRightSelected.value = false
                     viewModel._isFormulaSelected.value = false
@@ -174,7 +171,7 @@ class FeedingFragment : Fragment() {
             val duration = binding.timer.text.toString()
             val time = viewModel.getTime()
             viewModel.onTimerStop(binding.timer)
-            viewModel.setActions("Feeding", "$title $info", duration, time)
+            viewModel.setActions(getString(R.string.title_feeding), "$title $info", duration, time)
             requireActivity().onBackPressed()
             binding.timerStart.visibility = View.VISIBLE
             binding.timerPause.visibility = View.GONE
@@ -188,7 +185,7 @@ class FeedingFragment : Fragment() {
             val info = binding.comment.text.toString()
             val time = binding.timer.text.toString()
             viewModel.onTimerStop(binding.timer)
-            viewModel.setActions("Feeding", "$title $info", "", time )
+            viewModel.setActions(getString(R.string.title_feeding), "$title $info", "", time )
             requireActivity().onBackPressed()
         }
 
@@ -210,7 +207,7 @@ class FeedingFragment : Fragment() {
     private fun onButtonsClick(){
         binding.left.setOnClickListener {
             isChoosed = true
-            binding.acTitle.setText("Left")
+            binding.acTitle.setText(getString(R.string.left))
             binding.timerStart.visibility = View.VISIBLE
             binding.submit.visibility = View.GONE
             binding.edit.visibility = View.GONE
@@ -221,7 +218,7 @@ class FeedingFragment : Fragment() {
         }
         binding.right.setOnClickListener {
             isChoosed = true
-            binding.acTitle.setText("Right")
+            binding.acTitle.setText(getString(R.string.right))
             binding.timerStart.visibility = View.VISIBLE
             binding.submit.visibility = View.GONE
             binding.edit.visibility = View.GONE
@@ -232,7 +229,7 @@ class FeedingFragment : Fragment() {
         }
         binding.formula.setOnClickListener {
             isChoosed = true
-            binding.acTitle.setText("Formula")
+            binding.acTitle.setText(getString(R.string.formula))
             binding.timerStart.visibility = View.GONE
             binding.submit.visibility = View.VISIBLE
             binding.edit.visibility = View.VISIBLE
@@ -244,7 +241,7 @@ class FeedingFragment : Fragment() {
         }
         binding.meal.setOnClickListener {
             isChoosed = true
-            binding.acTitle.setText("Meal")
+            binding.acTitle.setText(getString(R.string.meal))
             binding.timerStart.visibility = View.GONE
             binding.submit.visibility = View.VISIBLE
             binding.edit.visibility = View.VISIBLE

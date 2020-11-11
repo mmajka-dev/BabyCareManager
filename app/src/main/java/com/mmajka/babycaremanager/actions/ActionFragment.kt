@@ -81,7 +81,7 @@ class ActionFragment : Fragment() {
 
         binding.submit.setOnClickListener {
             val date = viewModel.getDate()
-            val title = CURRENT_ACTIVITY
+            val title = binding.title.text.toString()
             val time = binding.time.text.toString()
             val info = binding.comment.text.toString()
             viewModel.setActions(date, time, title, info, "")
@@ -96,21 +96,21 @@ class ActionFragment : Fragment() {
                 time.setTextColor(ContextCompat.getColor(context!!, R.color.colorPurple))
                 submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorPurple))
                 edit.drawable.setTint(ContextCompat.getColor(context!!, R.color.colorPurple))
-                title.setText("Sleep")
+                title.setText(getString(R.string.title_sleep))
             }
             "Bath" ->{
                 toolbar.background.setTint(ContextCompat.getColor(context!!, R.color.colorBlue))
                 time.setTextColor(ContextCompat.getColor(context!!, R.color.colorBlue))
                 submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorBlue))
                 edit.drawable.setTint(ContextCompat.getColor(context!!, R.color.colorBlue))
-                title.setText("Bath")
+                title.setText(getString(R.string.title_bath))
             }
             "Walk" ->{
                 toolbar.background.setTint(ContextCompat.getColor(context!!, R.color.colorGreen))
                 time.setTextColor(ContextCompat.getColor(context!!, R.color.colorGreen))
                 submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorGreen))
                 edit.drawable.setTint(ContextCompat.getColor(context!!, R.color.colorGreen))
-                title.setText("Walk")
+                title.setText(getString(R.string.title_walk))
             }
         }
     }
