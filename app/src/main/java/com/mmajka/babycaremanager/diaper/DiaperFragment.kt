@@ -28,6 +28,7 @@ class DiaperFragment : Fragment() {
     private lateinit var date: String
     private lateinit var time: String
     private lateinit var duration: String
+    var subtype = "diaper"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,7 +89,7 @@ class DiaperFragment : Fragment() {
             val title = binding.babyName.text.toString()
             val time = binding.time.text.toString()
             val info = "$addInfo ${binding.comment.text}"
-            viewModel.setActions(date, time, title, info, "")
+            viewModel.setActions(date, time, title, info, "", subtype)
             requireActivity().onBackPressed()
         }
     }
@@ -120,7 +121,7 @@ class DiaperFragment : Fragment() {
     }
 
     private fun scaleView(view: View){
-        view.animate().scaleX(1.1F).scaleY(1.1F)
+        view.animate().scaleX(1.15F).scaleY(1.15F)
     }
 
     private fun unscaleView(view: View){

@@ -1,5 +1,6 @@
 package com.mmajka.babycaremanager.feeding
 
+
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,7 @@ import kotlinx.coroutines.launch
 import java.lang.NullPointerException
 
 
+
 class FeedingFragment : Fragment() {
 
     /*Jeśli wybrana zostanie lewa albo prawa pierś to ujawnia się timer. Jeśli formula to przycisk play zmienia się w check,
@@ -35,6 +37,7 @@ class FeedingFragment : Fragment() {
     private lateinit var date: String
     private lateinit var time: String
     private lateinit var duration: String
+    var subtype = "feeding"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -171,7 +174,7 @@ class FeedingFragment : Fragment() {
             val duration = binding.timer.text.toString()
             val time = viewModel.getTime()
             viewModel.onTimerStop(binding.timer)
-            viewModel.setActions(getString(R.string.title_feeding), "$title $info", duration, time)
+            viewModel.setActions(getString(R.string.title_feeding), "$title $info", duration, time, subtype)
             requireActivity().onBackPressed()
             binding.timerStart.visibility = View.VISIBLE
             binding.timerPause.visibility = View.GONE
@@ -185,7 +188,7 @@ class FeedingFragment : Fragment() {
             val info = binding.comment.text.toString()
             val time = binding.timer.text.toString()
             viewModel.onTimerStop(binding.timer)
-            viewModel.setActions(getString(R.string.title_feeding), "$title $info", "", time )
+            viewModel.setActions(getString(R.string.title_feeding), "$title $info", "", time, subtype)
             requireActivity().onBackPressed()
         }
 

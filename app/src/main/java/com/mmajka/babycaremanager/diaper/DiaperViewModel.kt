@@ -52,9 +52,9 @@ class DiaperViewModel(application: Application) : AndroidViewModel(application) 
         return date
     }
 
-    fun setActions(date: String, time: String, title: String, info: String, duration: String){
+    fun setActions(date: String, time: String, title: String, info: String, duration: String, subtype: String){
         val id = Date().time.toString()
-        val action = BasicActionEntity(id, title, date, time, info, duration)
+        val action = BasicActionEntity(id, title, date, time, info, duration, subtype)
         refActions.child(id).setValue(action)
     }
 

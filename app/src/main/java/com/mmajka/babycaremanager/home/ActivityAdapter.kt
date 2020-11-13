@@ -22,20 +22,20 @@ class ActivityAdapter(val actions: ArrayList<BasicActionEntity>): RecyclerView.A
         holder.bind(bind)
 
         //TODO do poprawy na subtype
-        when(actions.get(position).title){
-            "Diaper" -> {
+        when(actions.get(position).subtype){
+            "diaper" -> {
                 image.setImageResource(R.drawable.ic_diaper_rv)
             }
-            "Feeding" -> {
+            "feeding" -> {
                 image.setImageResource(R.drawable.ic_bottle_rv)
             }
-            "Bath" ->{
+            "bath" ->{
                 image.setImageResource(R.drawable.ic_bathtub_rv)
             }
-            "Walk" -> {
+            "walk" -> {
                 image.setImageResource(R.drawable.ic_pram_rv)
             }
-            "Sleep" -> {
+            "sleep" -> {
                 image.setImageResource(R.drawable.ic_sleep_rv)
             }
         }

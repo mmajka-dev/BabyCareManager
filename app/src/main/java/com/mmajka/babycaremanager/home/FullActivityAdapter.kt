@@ -25,26 +25,26 @@ class FullActivityAdapter(val actions: ArrayList<BasicActionEntity>, val onClick
         val card = holder.card
         holder.bind(bind, onClickListener)
 
-        when(actions.get(position).title){
-            "Diaper" -> {
+        when(actions.get(position).subtype){
+            "diaper" -> {
                 image.setImageResource(R.drawable.ic_diaper_rv)
                 card.setCardBackgroundColor(Color.parseColor("#F2C06C"))
             }
-            "Feeding" -> {
+            "feeding" -> {
                 image.setImageResource(R.drawable.ic_bottle_rv)
                 duration.visibility = View.VISIBLE
                 durationTxt.visibility = View.VISIBLE
                 card.setCardBackgroundColor(Color.parseColor("#FA8997"))
             }
-            "Bath" ->{
+            "bath" ->{
                 image.setImageResource(R.drawable.ic_bathtub_rv)
                 card.setCardBackgroundColor(Color.parseColor("#62BCD4"))
             }
-            "Walk" -> {
+            "walk" -> {
                 image.setImageResource(R.drawable.ic_pram_rv)
                 card.setCardBackgroundColor(Color.parseColor("#6DB67F"))
             }
-            "Sleep" -> {
+            "sleep" -> {
                 image.setImageResource(R.drawable.ic_sleep_rv)
                 card.setCardBackgroundColor(Color.parseColor("#CAA4CC"))
             }
