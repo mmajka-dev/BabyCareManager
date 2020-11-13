@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "274862160276",
+    "firebase_url": "https://babycare-manager.firebaseio.com",
+    "project_id": "babycare-manager",
+    "storage_bucket": "babycare-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274862160276:android:8a88d30b7574b66f8b7781",
+        "android_client_info": {
+          "package_name": "com.mmajka.babycaremanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274862160276-u8hu3cbdmu0vk6tas1rf4fhvscfe90dl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX_dRmkARk2Wy_MQCm2tIWrgGABoY7WZ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274862160276-u8hu3cbdmu0vk6tas1rf4fhvscfe90dl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
