@@ -40,7 +40,7 @@ class AllActions : Fragment(), onClickListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(AllActionsViewModel::class.java)
-
+        setupRecycler()
 
         binding.toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
@@ -50,22 +50,6 @@ class AllActions : Fragment(), onClickListener {
     override fun onStart() {
         super.onStart()
         setupRecycler()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setupRecycler()
-    }
-
-    private fun setupRecycler(){
-        viewModel.getCare()
-        viewModel.actions.observe(viewLifecycleOwner, Observer {
-            val layoutManager = LinearLayoutManager(binding.root.context)
-            layoutManager.reverseLayout = true
-            layoutManager.stackFromEnd = true
-            binding.allRecyclerView.layoutManager = layoutManager
-            binding.allRecyclerView.adapter = FullActivityAdapter(it, this)
-        })
     }
 
     override fun onClick(position: Int, view: View, action: BasicActionEntity) {
@@ -82,42 +66,29 @@ class AllActions : Fragment(), onClickListener {
         bundle.putString("time", action.time)
         bundle.putString("duration", action.duration)
         bundle.putString("info", action.info)
+        bundle.putString("subtype", action.subtype)
 
-        when(action.title){
-            "Diaper" ->{
+        when(action.subtype){
+            "diaper" ->{
                 diaper.arguments = bundle
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
                 fragmentTransaction.replace(R.id.fragment_container, diaper, "h")
                 fragmentTransaction.addToBackStack("")
                 fragmentTransaction.commit()
             }
-            "Feeding" ->{
+            "feeding" ->{
                 feeding.arguments = bundle
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
                 fragmentTransaction.replace(R.id.fragment_container, feeding, "h")
                 fragmentTransaction.addToBackStack("")
                 fragmentTransaction.commit()
             }
-            "Bath" -> {
-                CURRENT_ACTIVITY = "Bath"
+            else -> {
                 another.arguments = bundle
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
                 fragmentTransaction.replace(R.id.fragment_container, another, "h")
                 fragmentTransaction.addToBackStack("")
                 fragmentTransaction.commit()
-            }
-            "Walk" ->{
-                CURRENT_ACTIVITY = "Walk"
-                another.arguments = bundle
-                fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
-                fragmentTransaction.replace(R.id.fragment_container, another, "h")
-                fragmentTransaction.addToBackStack("")
-                fragmentTransaction.commit()
-            }
-            "Sleep" ->{
-                CURRENT_ACTIVITY = "Sleep"
-                another.arguments = bundle
-                another
             }
         }
 
@@ -130,12 +101,23 @@ class AllActions : Fragment(), onClickListener {
                 val id = action.id
                 viewModel.deleteAction(id, position)
                 setupRecycler()
-                today_recycler_view.adapter!!.notifyDataSetChanged()
+                binding.allRecyclerView.adapter!!.notifyDataSetChanged()
                 Log.i("Delete: ","${viewModel.actions.value!!.size}")
             }
             .setNegativeButton("No"){dialog, which ->
                 dialog.dismiss()
             }
         dialog.show()
+    }
+
+    private fun setupRecycler(){
+        viewModel.getCare()
+        viewModel.actions.observe(viewLifecycleOwner, Observer {
+            val layoutManager = LinearLayoutManager(binding.root.context)
+            layoutManager.reverseLayout = true
+            layoutManager.stackFromEnd = true
+            binding.allRecyclerView.layoutManager = layoutManager
+            binding.allRecyclerView.adapter = FullActivityAdapter(it, this)
+        })
     }
 }

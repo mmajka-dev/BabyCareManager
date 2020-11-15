@@ -44,7 +44,6 @@ class AllTodayFragment : Fragment(), onClickListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(AllTodayViewModel::class.java)
-        val container = R.id.fragment_container
         setupRecycler()
 
         binding.toolbar.setNavigationOnClickListener {
@@ -71,16 +70,17 @@ class AllTodayFragment : Fragment(), onClickListener {
         bundle.putString("time", action.time)
         bundle.putString("duration", action.duration)
         bundle.putString("info", action.info)
+        bundle.putString("subtype", action.subtype)
 
-        when(action.title){
-            "Diaper" ->{
+        when(action.subtype){
+            "diaper" ->{
                 diaper.arguments = bundle
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
                 fragmentTransaction.replace(R.id.fragment_container, diaper, "h")
                 fragmentTransaction.addToBackStack("")
                 fragmentTransaction.commit()
             }
-            "Feeding" ->{
+            "feeding" ->{
                 feeding.arguments = bundle
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
                 fragmentTransaction.replace(R.id.fragment_container, feeding, "h")
@@ -122,7 +122,6 @@ class AllTodayFragment : Fragment(), onClickListener {
             layoutManager.stackFromEnd = true
             binding.todayRecyclerView.layoutManager = layoutManager
             binding.todayRecyclerView.adapter = FullActivityAdapter(it, this)
-            Log.i("Size: ","${viewModel.actoday.value!!.size}")
         })
     }
 }

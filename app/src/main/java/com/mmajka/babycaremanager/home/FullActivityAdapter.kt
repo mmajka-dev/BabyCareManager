@@ -32,9 +32,11 @@ class FullActivityAdapter(val actions: ArrayList<BasicActionEntity>, val onClick
             }
             "feeding" -> {
                 image.setImageResource(R.drawable.ic_bottle_rv)
-                duration.visibility = View.VISIBLE
-                durationTxt.visibility = View.VISIBLE
                 card.setCardBackgroundColor(Color.parseColor("#FA8997"))
+                if (!actions.get(position).duration.isEmpty()){
+                    duration.visibility = View.VISIBLE
+                    durationTxt.visibility = View.VISIBLE
+                }
             }
             "bath" ->{
                 image.setImageResource(R.drawable.ic_bathtub_rv)

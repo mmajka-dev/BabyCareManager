@@ -16,6 +16,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.mmajka.babycaremanager.MainActivity.Companion.CURRENT_ACTIVITY
 import com.mmajka.babycaremanager.R
 import com.mmajka.babycaremanager.databinding.ActionFragmentBinding
+import kotlinx.android.synthetic.main.action_fragment.*
 import java.lang.NullPointerException
 
 class ActionFragment : Fragment() {
@@ -66,6 +67,33 @@ class ActionFragment : Fragment() {
             duration = bundle.getString("duration")!!
             subtype = bundle.getString("subtype")!!
 
+            try {
+                when(subtype){
+                    "sleep" ->{
+                        binding.appBar.background.setTint(ContextCompat.getColor(context!!, R.color.colorPurple))
+                        binding.time.setTextColor(ContextCompat.getColor(context!!, R.color.colorPurple))
+                        binding.submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorPurple))
+                        binding.edit.drawable.setTint(ContextCompat.getColor(context!!, R.color.colorPurple))
+                        binding.title.setText(getString(R.string.title_sleep))
+                    }
+                    "bath" ->{
+                        binding.appBar.background.setTint(ContextCompat.getColor(context!!, R.color.colorBlue))
+                        binding.time.setTextColor(ContextCompat.getColor(context!!, R.color.colorBlue))
+                        binding.submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorBlue))
+                        binding.edit.drawable.setTint(ContextCompat.getColor(context!!, R.color.colorBlue))
+                        binding.title.setText(getString(R.string.title_bath))
+                    }
+                    "walk" ->{
+                        binding.appBar.background.setTint(ContextCompat.getColor(context!!, R.color.colorGreen))
+                        binding.time.setTextColor(ContextCompat.getColor(context!!, R.color.colorGreen))
+                        binding.submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorGreen))
+                        binding.edit.drawable.setTint(ContextCompat.getColor(context!!, R.color.colorGreen))
+                        binding.title.setText(getString(R.string.title_walk))
+                    }
+                }
+            }catch (e: NullPointerException){
+                Log.e("Bundle error: ","${e.message}")
+            }
             binding.time.text = time
             binding.comment.setText(info)
         }
@@ -97,26 +125,26 @@ class ActionFragment : Fragment() {
             "Sleep" ->{
                 subtype = "sleep"
                 toolbar.background.setTint(ContextCompat.getColor(context!!, R.color.colorPurple))
-                time.setTextColor(ContextCompat.getColor(context!!, R.color.colorPurple))
-                submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorPurple))
-                edit.drawable.setTint(ContextCompat.getColor(context!!, R.color.colorPurple))
-                title.setText(getString(R.string.title_sleep))
+                binding.time.setTextColor(ContextCompat.getColor(context!!, R.color.colorPurple))
+                binding.submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorPurple))
+                binding.edit.drawable.setTint(ContextCompat.getColor(context!!, R.color.colorPurple))
+                binding.title.setText(getString(R.string.title_sleep))
             }
             "Bath" ->{
                 subtype = "bath"
                 toolbar.background.setTint(ContextCompat.getColor(context!!, R.color.colorBlue))
-                time.setTextColor(ContextCompat.getColor(context!!, R.color.colorBlue))
-                submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorBlue))
-                edit.drawable.setTint(ContextCompat.getColor(context!!, R.color.colorBlue))
-                title.setText(getString(R.string.title_bath))
+                binding.time.setTextColor(ContextCompat.getColor(context!!, R.color.colorBlue))
+                binding.submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorBlue))
+                binding.edit.drawable.setTint(ContextCompat.getColor(context!!, R.color.colorBlue))
+                binding.title.setText(getString(R.string.title_bath))
             }
             "Walk" ->{
                 subtype = "walk"
                 toolbar.background.setTint(ContextCompat.getColor(context!!, R.color.colorGreen))
-                time.setTextColor(ContextCompat.getColor(context!!, R.color.colorGreen))
-                submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorGreen))
-                edit.drawable.setTint(ContextCompat.getColor(context!!, R.color.colorGreen))
-                title.setText(getString(R.string.title_walk))
+                binding.time.setTextColor(ContextCompat.getColor(context!!, R.color.colorGreen))
+                binding.submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorGreen))
+                binding.edit.drawable.setTint(ContextCompat.getColor(context!!, R.color.colorGreen))
+                binding.title.setText(getString(R.string.title_walk))
             }
         }
     }

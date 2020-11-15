@@ -21,7 +21,6 @@ class ActivityAdapter(val actions: ArrayList<BasicActionEntity>): RecyclerView.A
         val image = holder.image
         holder.bind(bind)
 
-        //TODO do poprawy na subtype
         when(actions.get(position).subtype){
             "diaper" -> {
                 image.setImageResource(R.drawable.ic_diaper_rv)
