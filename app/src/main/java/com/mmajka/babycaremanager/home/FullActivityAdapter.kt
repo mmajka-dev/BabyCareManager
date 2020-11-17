@@ -25,7 +25,7 @@ class FullActivityAdapter(val actions: ArrayList<BasicActionEntity>, val onClick
         val card = holder.card
         holder.bind(bind, onClickListener)
 
-        when(actions.get(position).subtype){
+        when(actions.get(position).type){
             "diaper" -> {
                 image.setImageResource(R.drawable.ic_diaper_rv)
                 card.setCardBackgroundColor(Color.parseColor("#F2C06C"))
@@ -68,6 +68,7 @@ class FullActivityViewHolder(view: View): RecyclerView.ViewHolder(view){
     val durationTxt = itemView.duration_txt
     val comment = itemView.full_comment
     val id = itemView.action_id
+
 
     fun bind(action: BasicActionEntity, onClickListener: onClickListener){
         title.text = action.title

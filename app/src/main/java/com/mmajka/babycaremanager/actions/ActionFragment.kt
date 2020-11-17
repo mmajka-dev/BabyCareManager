@@ -34,7 +34,7 @@ class ActionFragment : Fragment() {
     private lateinit var date: String
     private lateinit var time: String
     private lateinit var duration: String
-    private lateinit var subtype: String
+    private lateinit var type: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,10 +65,10 @@ class ActionFragment : Fragment() {
             date = bundle.getString("date")!!
             time = bundle.getString("time")!!
             duration = bundle.getString("duration")!!
-            subtype = bundle.getString("subtype")!!
+            type = bundle.getString("type")!!
 
             try {
-                when(subtype){
+                when(type){
                     "sleep" ->{
                         binding.appBar.background.setTint(ContextCompat.getColor(context!!, R.color.colorPurple))
                         binding.time.setTextColor(ContextCompat.getColor(context!!, R.color.colorPurple))
@@ -115,7 +115,7 @@ class ActionFragment : Fragment() {
             val title = binding.title.text.toString()
             val time = binding.time.text.toString()
             val info = binding.comment.text.toString()
-            viewModel.setActions(date, time, title, info, "", subtype)
+            viewModel.setActions(date, time, title, info, "", type)
             requireActivity().onBackPressed()
         }
     }
@@ -123,7 +123,7 @@ class ActionFragment : Fragment() {
     private fun setupView(toolbar: AppBarLayout, title: TextView, submit: ImageButton, time: TextView, edit: ImageButton){
         when(CURRENT_ACTIVITY){
             "Sleep" ->{
-                subtype = "sleep"
+                type = "sleep"
                 toolbar.background.setTint(ContextCompat.getColor(context!!, R.color.colorPurple))
                 binding.time.setTextColor(ContextCompat.getColor(context!!, R.color.colorPurple))
                 binding.submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorPurple))
@@ -131,7 +131,7 @@ class ActionFragment : Fragment() {
                 binding.title.setText(getString(R.string.title_sleep))
             }
             "Bath" ->{
-                subtype = "bath"
+                type = "bath"
                 toolbar.background.setTint(ContextCompat.getColor(context!!, R.color.colorBlue))
                 binding.time.setTextColor(ContextCompat.getColor(context!!, R.color.colorBlue))
                 binding.submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorBlue))
@@ -139,7 +139,7 @@ class ActionFragment : Fragment() {
                 binding.title.setText(getString(R.string.title_bath))
             }
             "Walk" ->{
-                subtype = "walk"
+                type = "walk"
                 toolbar.background.setTint(ContextCompat.getColor(context!!, R.color.colorGreen))
                 binding.time.setTextColor(ContextCompat.getColor(context!!, R.color.colorGreen))
                 binding.submit.background.setTint(ContextCompat.getColor(context!!, R.color.colorGreen))

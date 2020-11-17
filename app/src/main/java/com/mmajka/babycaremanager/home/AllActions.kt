@@ -66,9 +66,10 @@ class AllActions : Fragment(), onClickListener {
         bundle.putString("time", action.time)
         bundle.putString("duration", action.duration)
         bundle.putString("info", action.info)
+        bundle.putString("type", action.type)
         bundle.putString("subtype", action.subtype)
 
-        when(action.subtype){
+        when(action.type){
             "diaper" ->{
                 diaper.arguments = bundle
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)

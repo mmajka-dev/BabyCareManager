@@ -28,7 +28,8 @@ class DiaperFragment : Fragment() {
     private lateinit var date: String
     private lateinit var time: String
     private lateinit var duration: String
-    var subtype = "diaper"
+    private lateinit var subtype: String
+    var type = "diaper"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,18 +51,20 @@ class DiaperFragment : Fragment() {
         binding.time.text = viewModel.getTime()
         var addInfo = ""
 
-        viewModel._isPeeSelected.observe(viewLifecycleOwner, Observer {isSelected ->
+        viewModel.isPeeSelected.observe(viewLifecycleOwner, Observer {isSelected ->
             if (isSelected){
                 scaleView(pee)
+                subtype = "Pee"
                 addInfo = getString(R.string.pee)
             }else{
                 unscaleView(pee)
             }
         })
 
-        viewModel._isPooSelected.observe(viewLifecycleOwner, Observer {isSelected ->
+        viewModel.isPooSelected.observe(viewLifecycleOwner, Observer {isSelected ->
             if (isSelected){
                 scaleView(poo)
+                subtype = "Poo"
                 addInfo = getString(R.string.poo)
             }else{
                 unscaleView(poo)
@@ -89,7 +92,7 @@ class DiaperFragment : Fragment() {
             val title = binding.babyName.text.toString()
             val time = binding.time.text.toString()
             val info = "$addInfo ${binding.comment.text}"
-            viewModel.setActions(date, time, title, info, "", subtype)
+            viewModel.setActions(date, time, title, info, "", type, subtype)
             requireActivity().onBackPressed()
         }
     }
@@ -104,7 +107,7 @@ class DiaperFragment : Fragment() {
             date = bundle.getString("date")!!
             time = bundle.getString("time")!!
             duration = bundle.getString("duration")!!
-
+            subtype = bundle.getString("subtype")!!
             binding.time.text = time
             binding.comment.setText(info)
             if (info.equals("Pee")){
