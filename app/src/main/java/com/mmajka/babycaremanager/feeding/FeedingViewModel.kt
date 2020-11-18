@@ -46,9 +46,9 @@ class FeedingViewModel(application: Application) : AndroidViewModel(application)
     val isMealSelected: LiveData<Boolean>
         get() = _isMealSelected
 
-    fun setActions(title: String, info: String, duration: String, time: String, subtype: String){
+    fun setActions(title: String, info: String, duration: String, time: String, type: String, subtype: String){
         val id = Date().time.toString()
-        val action = BasicActionEntity(id, title, getDate(), time, info, duration, subtype)
+        val action = BasicActionEntity(id, title, getDate(), time, info, duration, type, subtype)
         refActions.child(id).setValue(action)
     }
 

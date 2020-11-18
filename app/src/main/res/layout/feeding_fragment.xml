@@ -207,18 +207,5 @@
         android:animateLayoutChanges="true"
         android:visibility="gone"/>
 
-    <TextView
-        android:id="@+id/ml"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/timer"
-        android:layout_marginStart="18dp"
-        android:layout_toEndOf="@+id/comment"
-        android:layout_centerHorizontal="true"
-        android:text="ml"
-        android:textSize="50sp"
-        android:textColor="@color/colorRed"
-        android:visibility="gone"
-        />
 </RelativeLayout>
 </layout>

@@ -37,7 +37,8 @@ class FeedingFragment : Fragment() {
     private lateinit var date: String
     private lateinit var time: String
     private lateinit var duration: String
-    var subtype = "feeding"
+    private lateinit var subtype: String
+    var type = "feeding"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,10 +59,12 @@ class FeedingFragment : Fragment() {
             date = bundle.getString("date")!!
             time = bundle.getString("time")!!
             duration = bundle.getString("duration")!!
+            type = bundle.getString("type")!!
+            subtype = bundle.getString("subtype")!!
             lockButtons()
             //TODO do przerobienia na subtype
             try {
-                if (info.startsWith("Left") || info.startsWith("Lewa")){
+                if (subtype == "left"){
                     Log.i("Info: ","$info")
                     viewModel._isLeftSelected.value = true
                     viewModel._isRightSelected.value = false
@@ -70,7 +73,7 @@ class FeedingFragment : Fragment() {
                     viewModel._time.value = duration
                     binding.timerStart.visibility = View.GONE
                     binding.submit.visibility = View.VISIBLE
-                }else if (info.startsWith(" Right") || info.startsWith("Prawa")){
+                }else if (subtype == "right"){
                     viewModel._isLeftSelected.value = false
                     viewModel._isRightSelected.value = true
                     viewModel._isFormulaSelected.value = false
@@ -78,13 +81,13 @@ class FeedingFragment : Fragment() {
                     viewModel._time.value = duration
                     binding.timerStart.visibility = View.GONE
                     binding.submit.visibility = View.VISIBLE
-                }else if (info.startsWith("Formula") || info.startsWith("Mleko")){
+                }else if (subtype == "formula"){
                     viewModel._isLeftSelected.value = false
                     viewModel._isRightSelected.value = false
                     viewModel._isFormulaSelected.value = true
                     viewModel._isMealSelected.value = false
                     viewModel._time.value = time
-                }else if (info.startsWith("Meal") || info.startsWith("Posiłek")){
+                }else if (subtype == "meal"){
                     viewModel._isLeftSelected.value = false
                     viewModel._isRightSelected.value = false
                     viewModel._isFormulaSelected.value = false
@@ -119,6 +122,7 @@ class FeedingFragment : Fragment() {
         viewModel._isLeftSelected.observe(viewLifecycleOwner, Observer { isSelected ->
             if (isSelected){
                 scaleView(left)
+                subtype = "left"
                timer.text = viewModel.time.value
             }else{
                 unscaleView(left)
@@ -128,6 +132,7 @@ class FeedingFragment : Fragment() {
         viewModel._isRightSelected.observe(viewLifecycleOwner, Observer { isSelected ->
             if (isSelected){
                 scaleView(right)
+                subtype = "right"
                 timer.text = viewModel.time.value
             }else{
                 unscaleView(right)
@@ -137,6 +142,7 @@ class FeedingFragment : Fragment() {
         viewModel._isFormulaSelected.observe(viewLifecycleOwner, Observer { isSelected ->
             if (isSelected){
                 scaleView(formula)
+                subtype = "formula"
             }else{
                 unscaleView(formula)
             }
@@ -145,6 +151,7 @@ class FeedingFragment : Fragment() {
         viewModel._isMealSelected.observe(viewLifecycleOwner, Observer { isSelected ->
             if (isSelected){
                 scaleView(meal)
+                subtype = "meal"
             }else{
                 unscaleView(meal)
             }
@@ -174,7 +181,7 @@ class FeedingFragment : Fragment() {
             val duration = binding.timer.text.toString()
             val time = viewModel.getTime()
             viewModel.onTimerStop(binding.timer)
-            viewModel.setActions(getString(R.string.title_feeding), "$title $info", duration, time, subtype)
+            viewModel.setActions(getString(R.string.title_feeding), "$title $info", duration, time, "feeding", subtype)
             requireActivity().onBackPressed()
             binding.timerStart.visibility = View.VISIBLE
             binding.timerPause.visibility = View.GONE
@@ -188,7 +195,7 @@ class FeedingFragment : Fragment() {
             val info = binding.comment.text.toString()
             val time = binding.timer.text.toString()
             viewModel.onTimerStop(binding.timer)
-            viewModel.setActions(getString(R.string.title_feeding), "$title $info", "", time, subtype)
+            viewModel.setActions(getString(R.string.title_feeding), "$title $info", "", time, "feeding", subtype)
             requireActivity().onBackPressed()
         }
 
@@ -210,6 +217,7 @@ class FeedingFragment : Fragment() {
     private fun onButtonsClick(){
         binding.left.setOnClickListener {
             isChoosed = true
+            subtype = "left"
             binding.acTitle.setText(getString(R.string.left))
             binding.timerStart.visibility = View.VISIBLE
             binding.submit.visibility = View.GONE
@@ -221,6 +229,7 @@ class FeedingFragment : Fragment() {
         }
         binding.right.setOnClickListener {
             isChoosed = true
+            subtype = "right"
             binding.acTitle.setText(getString(R.string.right))
             binding.timerStart.visibility = View.VISIBLE
             binding.submit.visibility = View.GONE
@@ -232,6 +241,7 @@ class FeedingFragment : Fragment() {
         }
         binding.formula.setOnClickListener {
             isChoosed = true
+            subtype = "formula"
             binding.acTitle.setText(getString(R.string.formula))
             binding.timerStart.visibility = View.GONE
             binding.submit.visibility = View.VISIBLE
@@ -244,6 +254,7 @@ class FeedingFragment : Fragment() {
         }
         binding.meal.setOnClickListener {
             isChoosed = true
+            subtype = "meal"
             binding.acTitle.setText(getString(R.string.meal))
             binding.timerStart.visibility = View.GONE
             binding.submit.visibility = View.VISIBLE
