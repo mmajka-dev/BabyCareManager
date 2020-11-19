@@ -22,6 +22,7 @@ class FullActivityAdapter(val actions: ArrayList<BasicActionEntity>, val onClick
         val image = holder.image
         val duration = holder.duration
         val durationTxt = holder.durationTxt
+        val comment = holder.comment
         val card = holder.card
         holder.bind(bind, onClickListener)
 
@@ -37,6 +38,7 @@ class FullActivityAdapter(val actions: ArrayList<BasicActionEntity>, val onClick
                     duration.visibility = View.VISIBLE
                     durationTxt.visibility = View.VISIBLE
                 }
+
             }
             "bath" ->{
                 image.setImageResource(R.drawable.ic_bathtub_rv)
@@ -67,6 +69,7 @@ class FullActivityViewHolder(view: View): RecyclerView.ViewHolder(view){
     val duration = itemView.duration
     val durationTxt = itemView.duration_txt
     val comment = itemView.full_comment
+    val subtype = itemView.subtype
     val id = itemView.action_id
 
 
@@ -77,6 +80,7 @@ class FullActivityViewHolder(view: View): RecyclerView.ViewHolder(view){
         comment.text = action.info
         duration.text = action.duration
         id.text = action.id
+        subtype.text = action.subtype
 
         itemView.setOnClickListener {
             onClickListener.onClick(adapterPosition, itemView, action)

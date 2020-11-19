@@ -11,10 +11,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.mmajka.babycaremanager.R
 import com.mmajka.babycaremanager.databinding.SplashFragmentBinding
 import com.mmajka.babycaremanager.home.HomeFragment
+import com.mmajka.babycaremanager.utils.ConnectionChecker
 import com.mmajka.babycaremanager.utils.Utils
 import com.mmajka.babycaremanager.welcome.WelcomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -42,30 +45,33 @@ class SplashFragment : Fragment(), CoroutineScope {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(SplashViewModel::class.java)
         val check = onUserCheck()
-
+        val connectionChecker = ConnectionChecker(context!!)
         val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
 
-        runBlocking {
-
-        }
-        launch {
-            loadDatabase().await()
-            delay(1000)
-            trimDatabase()
-            if (check){
-                fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
-                fragmentTransaction.replace(R.id.fragment_container, HomeFragment(), "h")
-                fragmentTransaction.disallowAddToBackStack()
-                fragmentTransaction.commit()
+        connectionChecker.observe(viewLifecycleOwner, Observer { isActive ->
+            if (isActive){
+                launch {
+                    loadDatabase().await()
+                    delay(1000)
+                    if (check){
+                        fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+                        fragmentTransaction.replace(R.id.fragment_container, HomeFragment(), "h")
+                        fragmentTransaction.disallowAddToBackStack()
+                        fragmentTransaction.commit()
+                    }else{
+                        newID()
+                        fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
+                        fragmentTransaction.replace(R.id.fragment_container, WelcomeFragment(), "h")
+                        fragmentTransaction.disallowAddToBackStack()
+                        fragmentTransaction.commit()
+                    }
+                }
             }else{
-                newID()
-                fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
-                fragmentTransaction.replace(R.id.fragment_container, WelcomeFragment(), "h")
-                fragmentTransaction.disallowAddToBackStack()
-                fragmentTransaction.commit()
+                Snackbar.make(requireView(), "No internet connection", Snackbar.LENGTH_SHORT).show()
             }
-        }
+        })
+
     }
 
     private fun onUserCheck(): Boolean{
@@ -86,9 +92,6 @@ class SplashFragment : Fragment(), CoroutineScope {
         viewModel.loadDatabase()
     }
 
-    private fun trimDatabase(){
-        viewModel.trimDatabase()
-    }
 
 
 }

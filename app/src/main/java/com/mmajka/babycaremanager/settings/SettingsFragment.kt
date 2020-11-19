@@ -92,7 +92,8 @@ class SettingsFragment : Fragment() {
             val n1 = binding.name.text.toString()
             val b1 = binding.birthday.text.toString()
             viewModel.putChildInfo(n1, b1)
-            Snackbar.make(binding.root, "Changes saved", Snackbar.LENGTH_SHORT).setBackgroundTint(resources.getColor(R.color.colorPrimary)).show()
+            Snackbar.make(binding.root, "Changes saved", Snackbar.LENGTH_SHORT).setBackgroundTint(resources.getColor(R.color.colorWhite))
+                .setTextColor(resources.getColor(R.color.colorPrimary)).show()
         }
 
         binding.imageView4.setOnClickListener {

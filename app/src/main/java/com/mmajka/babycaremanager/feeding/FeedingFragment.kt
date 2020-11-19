@@ -4,6 +4,7 @@ package com.mmajka.babycaremanager.feeding
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -123,7 +124,9 @@ class FeedingFragment : Fragment() {
             if (isSelected){
                 scaleView(left)
                 subtype = "left"
-               timer.text = viewModel.time.value
+                binding.comment.visibility = View.GONE
+                binding.timer.gravity = Gravity.CENTER
+                timer.text = viewModel.time.value
             }else{
                 unscaleView(left)
             }
@@ -133,6 +136,8 @@ class FeedingFragment : Fragment() {
             if (isSelected){
                 scaleView(right)
                 subtype = "right"
+                binding.comment.visibility = View.GONE
+                binding.timer.gravity = Gravity.CENTER
                 timer.text = viewModel.time.value
             }else{
                 unscaleView(right)
@@ -142,6 +147,7 @@ class FeedingFragment : Fragment() {
         viewModel._isFormulaSelected.observe(viewLifecycleOwner, Observer { isSelected ->
             if (isSelected){
                 scaleView(formula)
+                binding.comment.visibility = View.VISIBLE
                 subtype = "formula"
             }else{
                 unscaleView(formula)
@@ -151,6 +157,7 @@ class FeedingFragment : Fragment() {
         viewModel._isMealSelected.observe(viewLifecycleOwner, Observer { isSelected ->
             if (isSelected){
                 scaleView(meal)
+                binding.comment.visibility = View.VISIBLE
                 subtype = "meal"
             }else{
                 unscaleView(meal)
@@ -181,7 +188,7 @@ class FeedingFragment : Fragment() {
             val duration = binding.timer.text.toString()
             val time = viewModel.getTime()
             viewModel.onTimerStop(binding.timer)
-            viewModel.setActions(getString(R.string.title_feeding), "$title $info", duration, time, "feeding", subtype)
+            viewModel.setActions(getString(R.string.title_feeding), info, duration, time, "feeding", subtype)
             requireActivity().onBackPressed()
             binding.timerStart.visibility = View.VISIBLE
             binding.timerPause.visibility = View.GONE
@@ -195,7 +202,7 @@ class FeedingFragment : Fragment() {
             val info = binding.comment.text.toString()
             val time = binding.timer.text.toString()
             viewModel.onTimerStop(binding.timer)
-            viewModel.setActions(getString(R.string.title_feeding), "$title $info", "", time, "feeding", subtype)
+            viewModel.setActions(getString(R.string.title_feeding), info, "", time, "feeding", subtype)
             requireActivity().onBackPressed()
         }
 

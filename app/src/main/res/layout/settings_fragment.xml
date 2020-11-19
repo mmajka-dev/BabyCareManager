@@ -88,7 +88,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/name"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:layout_below="@+id/imageView4"
                 />
 
@@ -98,12 +98,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/name"
-                android:layout_marginStart="18dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="14dp"
-                android:layout_toEndOf="@+id/textView4"
+                android:layout_alignParentEnd="true"
                 android:drawablePadding="18dp"
                 android:foreground="@drawable/ripple"
                 android:text="@string/Date"
+                android:textSize="25sp"
                 app:drawableEndCompat="@drawable/ic_calendar_settings" />
 
             <EditText
@@ -112,11 +113,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/imageView4"
-                android:layout_marginStart="48dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="21dp"
-                android:layout_toEndOf="@+id/textView3"
+                android:layout_alignParentEnd="true"
                 android:background="@null"
                 android:text="@string/edit_name"
+                android:textSize="25sp"
                 android:drawableEnd="@drawable/ic_edit_settings"
                 android:drawablePadding="18dp"
                 android:textAlignment="viewStart"
@@ -130,6 +132,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="14dp"
                 android:text="@string/birthday"
+                android:textSize="25sp"
                 android:textColor="@color/colorHint"
                 android:layout_below="@id/textView3" />
 
