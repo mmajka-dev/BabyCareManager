@@ -1,8 +1,11 @@
 package com.mmajka.babycaremanager.splash
 
 import android.content.Context
+import android.content.Intent
 import android.net.wifi.WifiManager
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.transition.TransitionInflater
 import android.util.Log
 import android.view.Gravity
@@ -37,7 +40,6 @@ class SplashFragment : Fragment(), CoroutineScope {
 
     private lateinit var viewModel: SplashViewModel
     private lateinit var  bind: SplashFragmentBinding
-    private  var wifiManager = requireActivity().applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + Job()
@@ -83,8 +85,16 @@ class SplashFragment : Fragment(), CoroutineScope {
                 Snackbar.make(bind.root, "No internet connection", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(ContextCompat.getColor(context!!, R.color.colorWhite))
                     .setTextColor(ContextCompat.getColor(context!!, R.color.colorPrimary))
+                    .setAction("Turn ON", View.OnClickListener {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            val panelIntent = Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY)
+                            startActivityForResult(panelIntent, 0)
+                        } else {
+                            // add appropriate permissions to AndroidManifest file (see https://stackoverflow.com/questions/3930990/android-how-to-enable-disable-wifi-or-internet-connection-programmatically/61289575)
+                            (this.context?.getSystemService(Context.WIFI_SERVICE) as? WifiManager)?.apply { isWifiEnabled = true /*or false*/ }
+                        }
+                    })
                     .show()
-
             }
         })
 
