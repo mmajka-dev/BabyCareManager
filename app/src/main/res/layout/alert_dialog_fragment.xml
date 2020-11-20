@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".utils.AlertDialogFragment">
+
+    <ImageView
+        android:id="@+id/alert_drawable"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_alert"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        app:tint="@color/colorPrimary"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="No internet connection"
+        android:textSize="23sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@+id/alert_drawable"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>
