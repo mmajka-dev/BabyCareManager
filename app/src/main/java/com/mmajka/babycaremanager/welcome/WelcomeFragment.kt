@@ -78,12 +78,16 @@ class WelcomeFragment : Fragment() {
             getDate()
         }
         binding.okCode.setOnClickListener {
-            putID()
-            setConfigured()
-            requireActivity().supportFragmentManager.beginTransaction().replace(
-                R.id.fragment_container,
-                HomeFragment()
-            ).disallowAddToBackStack().commit()
+            if (!binding.code.text.isEmpty()) {
+                putID()
+                setConfigured()
+                requireActivity().supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_container,
+                    HomeFragment()
+                ).disallowAddToBackStack().commit()
+            }else{
+                Snackbar.make(requireView(), getString(R.string.code_msg), Snackbar.LENGTH_SHORT).show()
+            }
         }
 
         binding.photo.setOnClickListener {

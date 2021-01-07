@@ -44,4 +44,6 @@
     <string name="right">Prawa pierś</string>
     <string name="formula">Mleko modyfikowane</string>
     <string name="meal">Posiłek</string>
+    <string name="Code">Kod</string>
+    <string name="code_msg">Uzupełnij kod</string>
 </resources>

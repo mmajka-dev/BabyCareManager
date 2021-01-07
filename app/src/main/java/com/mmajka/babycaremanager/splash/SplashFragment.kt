@@ -91,7 +91,7 @@ class SplashFragment : Fragment(), CoroutineScope {
                             startActivityForResult(panelIntent, 0)
                         } else {
                             // add appropriate permissions to AndroidManifest file (see https://stackoverflow.com/questions/3930990/android-how-to-enable-disable-wifi-or-internet-connection-programmatically/61289575)
-                            (this.context?.getSystemService(Context.WIFI_SERVICE) as? WifiManager)?.apply { isWifiEnabled = true /*or false*/ }
+                            (this.context?.getSystemService(Context.WIFI_SERVICE) as? WifiManager)?.apply { isWifiEnabled = true }
                         }
                     })
                     .show()
@@ -111,7 +111,6 @@ class SplashFragment : Fragment(), CoroutineScope {
         val id = viewModel.generateID()
         viewModel.putID(id)
         Log.i("ID", "$id")
-        Toast.makeText(context, "$id", Toast.LENGTH_SHORT).show()
     }
 
     private fun loadDatabase() = CoroutineScope(Dispatchers.IO).async{

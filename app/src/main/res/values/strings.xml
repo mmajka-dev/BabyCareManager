@@ -44,4 +44,6 @@
     <string name="right">Right</string>
     <string name="formula">Formula</string>
     <string name="meal">Meal</string>
+    <string name="Code">Code</string>
+    <string name="code_msg">Type the code</string>
 </resources>
