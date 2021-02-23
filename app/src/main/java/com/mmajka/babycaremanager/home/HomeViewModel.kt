@@ -53,7 +53,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application){
     fun getCare(): LiveData<ArrayList<BasicActionEntity>> {
         val items = ArrayList<BasicActionEntity>()
         refActions.keepSynced(true)
-        refActions.limitToLast(7).addValueEventListener(object : ValueEventListener {
+        refActions.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 Log.i("Error", "${error.message}")
             }

@@ -24,6 +24,7 @@ class FullActivityAdapter(val actions: ArrayList<BasicActionEntity>, val onClick
         val durationTxt = holder.durationTxt
         val comment = holder.comment
         val card = holder.card
+        val subtype = holder.subtype
         holder.bind(bind, onClickListener)
 
         when(actions.get(position).type){

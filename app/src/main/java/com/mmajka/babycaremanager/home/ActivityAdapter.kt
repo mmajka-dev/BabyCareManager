@@ -49,11 +49,12 @@ class ActivityViewHolder(view: View): RecyclerView.ViewHolder(view){
     val image = itemView.imageView9
     val title = itemView.title
     val time = itemView.time
+    val date = itemView.date
 
     fun bind(action: BasicActionEntity){
         title.text = action.title
         time.text = action.time
-
+        date.text = action.date
     }
 }
 

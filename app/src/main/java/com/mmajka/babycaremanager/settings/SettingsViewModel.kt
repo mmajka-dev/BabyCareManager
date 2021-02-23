@@ -53,6 +53,10 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         return photo
     }
 
+    fun putID(id: String){
+        prefInstance.savePreferences(id)
+    }
+
     fun clearList(){
         refActions.removeValue()
     }

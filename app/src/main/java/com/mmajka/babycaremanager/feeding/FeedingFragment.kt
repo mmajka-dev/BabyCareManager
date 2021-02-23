@@ -63,7 +63,7 @@ class FeedingFragment : Fragment() {
             type = bundle.getString("type")!!
             subtype = bundle.getString("subtype")!!
             lockButtons()
-            //TODO do przerobienia na subtype
+
             try {
                 if (subtype == "left"){
                     Log.i("Info: ","$info")
@@ -123,7 +123,7 @@ class FeedingFragment : Fragment() {
         viewModel._isLeftSelected.observe(viewLifecycleOwner, Observer { isSelected ->
             if (isSelected){
                 scaleView(left)
-                subtype = "left"
+                subtype = getString(R.string.left)
                 binding.comment.visibility = View.GONE
                 binding.timer.gravity = Gravity.CENTER
                 timer.text = viewModel.time.value
@@ -135,7 +135,7 @@ class FeedingFragment : Fragment() {
         viewModel._isRightSelected.observe(viewLifecycleOwner, Observer { isSelected ->
             if (isSelected){
                 scaleView(right)
-                subtype = "right"
+                subtype = getString(R.string.right)
                 binding.comment.visibility = View.GONE
                 binding.timer.gravity = Gravity.CENTER
                 timer.text = viewModel.time.value
@@ -148,7 +148,7 @@ class FeedingFragment : Fragment() {
             if (isSelected){
                 scaleView(formula)
                 binding.comment.visibility = View.VISIBLE
-                subtype = "formula"
+                subtype = getString(R.string.formula)
             }else{
                 unscaleView(formula)
             }
@@ -158,7 +158,7 @@ class FeedingFragment : Fragment() {
             if (isSelected){
                 scaleView(meal)
                 binding.comment.visibility = View.VISIBLE
-                subtype = "meal"
+                subtype = getString(R.string.meal)
             }else{
                 unscaleView(meal)
             }

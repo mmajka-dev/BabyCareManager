@@ -54,8 +54,7 @@ class DiaperFragment : Fragment() {
         viewModel.isPeeSelected.observe(viewLifecycleOwner, Observer {isSelected ->
             if (isSelected){
                 scaleView(pee)
-                subtype = "Pee"
-                addInfo = getString(R.string.pee)
+                subtype = getString(R.string.pee)
             }else{
                 unscaleView(pee)
             }
@@ -64,8 +63,7 @@ class DiaperFragment : Fragment() {
         viewModel.isPooSelected.observe(viewLifecycleOwner, Observer {isSelected ->
             if (isSelected){
                 scaleView(poo)
-                subtype = "Poo"
-                addInfo = getString(R.string.poo)
+                subtype = getString(R.string.poo)
             }else{
                 unscaleView(poo)
                 comment.setText("")
@@ -110,7 +108,7 @@ class DiaperFragment : Fragment() {
             subtype = bundle.getString("subtype")!!
             binding.time.text = time
             binding.comment.setText(info)
-            if (info.equals("Pee")){
+            if (info.equals("Siku") || info.equals("pee")){
                 viewModel._isPeeSelected.value = true
                 viewModel._isPooSelected.value = false
                 scaleView(pee)

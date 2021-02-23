@@ -56,8 +56,6 @@ class HomeFragment : Fragment() {
         Glide.with(this).load(viewModel.getPhotoPath()).error(R.drawable.ic_boy).into(photo)
         Log.i("PATH", "${viewModel.getPhotoPath()}")
         setupActivitiesRecycler()
-        setupTodayRecycler()
-
 
         binding.inventoryRv.diaper.setOnClickListener {
             CURRENT_ACTIVITY = "Diaper"
@@ -95,12 +93,6 @@ class HomeFragment : Fragment() {
             fragmentTransaction.commit()
         }
 
-        binding.tdFullscreen.setOnClickListener {
-            fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
-            fragmentTransaction.replace(R.id.fragment_container, AllTodayFragment(), "h")
-            fragmentTransaction.addToBackStack("")
-            fragmentTransaction.commit()
-        }
         binding.acFullscreen.setOnClickListener {
             fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_right, R.anim.slide_out_left)
             fragmentTransaction.replace(R.id.fragment_container, AllActions(), "h")
@@ -124,17 +116,6 @@ class HomeFragment : Fragment() {
             layoutManager.reverseLayout = true
             layoutManager.stackFromEnd = true
             binding.activitiesRv.layoutManager = layoutManager
-        })
-    }
-
-    private fun setupTodayRecycler(){
-        viewModel.getToday()
-        viewModel.actoday.observe(viewLifecycleOwner, Observer {
-            binding.summaryRv.adapter = ActivityAdapter((it))
-            val layoutManager = LinearLayoutManager(binding.root.context)
-            layoutManager.reverseLayout = true
-            layoutManager.stackFromEnd = true
-            binding.summaryRv.layoutManager = layoutManager
         })
     }
 

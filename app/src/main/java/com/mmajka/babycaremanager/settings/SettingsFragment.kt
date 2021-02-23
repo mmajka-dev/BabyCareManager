@@ -22,6 +22,7 @@ import com.mmajka.babycaremanager.R
 import com.mmajka.babycaremanager.actions.ActionFragment
 import com.mmajka.babycaremanager.data.child
 import com.mmajka.babycaremanager.databinding.SettingsFragmentBinding
+import com.mmajka.babycaremanager.home.HomeFragment
 import com.mmajka.babycaremanager.invite.InviteFragment
 import com.mmajka.babycaremanager.utils.Utils
 import kotlinx.android.synthetic.main.all_today_fragment.*
@@ -108,7 +109,16 @@ class SettingsFragment : Fragment() {
             showCodeCard()
         }
         binding.okCode.setOnClickListener {
-            setChildInfo()
+            if (!binding.code.text.isEmpty()) {
+                putID()
+                setChildInfo()
+                requireActivity().supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_container,
+                    HomeFragment()
+                ).disallowAddToBackStack().commit()
+            }else{
+                Snackbar.make(requireView(), getString(R.string.code_msg), Snackbar.LENGTH_SHORT).show()
+            }
         }
         binding.cancel.setOnClickListener {
             hideCodeCard()
@@ -119,6 +129,11 @@ class SettingsFragment : Fragment() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
         intent.setType("image/*")
         startActivityForResult(intent, 1)
+    }
+
+    private fun putID(){
+        val id = binding.code.text.toString()
+        viewModel.putID(id)
     }
 
     fun showCodeCard(){
